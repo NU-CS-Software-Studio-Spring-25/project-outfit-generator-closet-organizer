@@ -2,4 +2,4 @@
 
 Fashion App
 
-Goal: Finding outfit to fit a certain theme. The app would help collect clothing items from different stores and generator an outfit that fits the theme. 
+Goal: Finding an outfit to fit a certain theme. The app would help collect clothing items from different stores and generate an outfit that fits the theme. 
