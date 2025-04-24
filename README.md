@@ -2,4 +2,7 @@
 
 Fashion App
 
-Goal: Finding outfit to fit a certain theme. The app would help collect clothing items from different stores and generator an outfit that fits the theme. 
+Goal: Finding an outfit to fit a certain theme. The app would help collect clothing items from different stores and generate an outfit that fits the theme. 
+
+MVP of Project: Client gives us a word (description) of what they want for an outfit. Our product will give me (at minimum) a top and a bottom that match each other and what the client wants.
+Sample: "I want an outfit for a formal get together with my co-workers (female)" - output cute shirt / skirt
