@@ -1,5 +1,12 @@
 <h1>Clothing Items</h1>
 
+<% if params[:category].present? %>
+  <p>
+    Showing results for category: 
+    <strong><%= params[:category].capitalize %></strong>
+  </p>
+<% end %>
+
 <table class="table table-striped">
   <thead>
     <tr>
@@ -26,3 +33,8 @@
 </table>
 
 <%= link_to 'New Clothing Item', new_clothing_path, class: "btn btn-primary" %>
+
+
+
+
+

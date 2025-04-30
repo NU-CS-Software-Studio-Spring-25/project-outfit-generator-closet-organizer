@@ -1,4 +1,12 @@
 <h1>Welcome to the Outfit Generator</h1>
 <p>Enter a word to generate an outfit!</p>
 
-<%= link_to 'Browse Clothing', clothings_path, class: "btn btn-primary" %>
+<%= form_with url: clothings_path, method: :get, local: true do |form| %>
+  <div class="mb-3">
+    <%= form.label :category, "Enter Category" %>
+    <%= form.text_field :category, class: "form-control", placeholder: "e.g. spring" %>
+  </div>
+  <%= form.submit "Search", class: "btn btn-success" %>
+<% end %>
+
+<%= link_to 'Browse Clothing', clothings_path, class: "btn btn-primary mt-3" %>
