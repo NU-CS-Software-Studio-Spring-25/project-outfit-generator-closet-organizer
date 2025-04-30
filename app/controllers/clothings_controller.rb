@@ -24,6 +24,20 @@ class ClothingsController < ApplicationController
     end
   end
 
+  def edit
+    @clothing = Clothing.find(params[:id])
+  end
+  
+  def update
+    @clothing = Clothing.find(params[:id])
+    if @clothing.update(clothing_params)
+      redirect_to @clothing, notice: "Clothing item updated!"
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+  
+
   private
 
   def clothing_params
