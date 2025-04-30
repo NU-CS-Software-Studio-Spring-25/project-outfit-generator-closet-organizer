@@ -1,0 +1,20 @@
+<h1>New Clothing Item</h1>
+
+<%= form_with model: @clothing, local: true do |form| %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :brand %>
+    <%= form.text_field :brand %>
+  </div>
+
+  <div>
+    <%= form.label :category %>
+    <%= form.text_field :category %>
+  </div>
+
+  <%= form.submit "Create Item" %>
+<% end %>
