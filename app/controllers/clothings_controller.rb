@@ -7,10 +7,14 @@ class ClothingsController < ApplicationController
     end
   end
 
+  def show
+    @clothing = Clothing.find(params[:id])
+  end
+
   def new
     @clothing = Clothing.new
   end
-  
+
   def create
     @clothing = Clothing.new(clothing_params)
     if @clothing.save
@@ -19,14 +23,10 @@ class ClothingsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
-  
+
   private
-  
+
   def clothing_params
-    params.require(:clothing).permit(:name, :brand, :category)
+    params.require(:clothing).permit(:name, :brand, :category, :image)
   end
-  
 end
-
-
-
