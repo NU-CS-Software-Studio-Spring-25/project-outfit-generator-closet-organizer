@@ -42,7 +42,6 @@ gem "thruster", require: false
 
 # Bootstrap GEM File
 gem "bootstrap", "~> 5.3.0"
-#
 gem "jquery-rails"
 
 

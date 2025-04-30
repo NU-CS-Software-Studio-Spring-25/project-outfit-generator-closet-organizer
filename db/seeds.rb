@@ -7,3 +7,15 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+catalog = 
+      {name: "classic white tee", brand: "aerie", category: "country"}, #1
+      {name: "denim jeans", brand: "aerie", category: "country"},
+      {name: "loose tee", brand: "aerie", category: "summer"},
+      {name: "gym shorts", brand: "aerie", category: "summer"},
+      {name: "warm sweater", brand: "aerie", category: "winter"}, #5
+      {name: "long fleece pants", brand: "Aerie", category: "winter"},
+      {name: "blouse", brand: "Aerie", category: "spring"},
+      {name: "mini skirt", brand: "Aerie", category: "spring"},
+      {name: "loose sweater", brand: "Aerie", category: "fall"},
+      {name: "maxi skirt", brand: "Aerie", category: "fall"},
