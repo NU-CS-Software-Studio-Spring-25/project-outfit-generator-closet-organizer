@@ -9,11 +9,11 @@
 #   end
 
 catalog = [
-      {name: "classic white tee", brand: "aerie", category: "country"}, #1
-      {name: "denim jeans", brand: "aerie", category: "country"},
-      {name: "loose tee", brand: "aerie", category: "summer"},
-      {name: "gym shorts", brand: "aerie", category: "summer"},
-      {name: "warm sweater", brand: "aerie", category: "winter"}, #5
+      {name: "classic white tee", brand: "Aerie", category: "country"}, #1
+      {name: "denim jeans", brand: "Aerie", category: "country"},
+      {name: "loose tee", brand: "Aerie", category: "summer"},
+      {name: "gym shorts", brand: "Aerie", category: "summer"},
+      {name: "warm sweater", brand: "Aerie", category: "winter"}, #5
       {name: "long fleece pants", brand: "Aerie", category: "winter"},
       {name: "blouse", brand: "Aerie", category: "spring"},
       {name: "mini skirt", brand: "Aerie", category: "spring"},

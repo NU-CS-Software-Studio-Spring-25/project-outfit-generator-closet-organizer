@@ -41,8 +41,8 @@ gem "thruster", require: false
 # gem "image_processing", "~> 1.2"
 
 # Bootstrap GEM File
-gem "bootstrap", "~> 5.3.0"
-gem "jquery-rails"
+# gem "bootstrap", "~> 5.3.0"
+# gem "jquery-rails"
 
 
 group :development, :test do
