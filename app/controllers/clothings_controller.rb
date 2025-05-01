@@ -41,11 +41,7 @@ class ClothingsController < ApplicationController
   def destroy
     @clothing = Clothing.find(params[:id])
     @clothing.destroy
-<<<<<<< HEAD
     redirect_to clothings_path, notice: "Clothing item deleted."
-=======
-    redirect_to clothing_index_path, notice: 'Clothing item was successfully deleted.'
->>>>>>> 54e69caeef0c6da5f1415c4be2fb1931b336817a
   end
 
   private
