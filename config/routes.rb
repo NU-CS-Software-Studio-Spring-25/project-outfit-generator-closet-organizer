@@ -19,7 +19,10 @@ Rails.application.routes.draw do
   resources :clothings do
     member do
       get 'confirm_destroy'
+      get 'update'
     end
   end
-  
+
+
+
 end
