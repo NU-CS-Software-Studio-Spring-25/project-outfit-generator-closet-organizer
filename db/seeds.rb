@@ -11,16 +11,16 @@
 Clothing.destroy_all
 
 catalog = [
-      {name: "classic white tee", brand: "Aerie", category: "country"}, #1
-      {name: "denim jeans", brand: "Aerie", category: "country"},
-      {name: "loose tee", brand: "Aerie", category: "summer"},
-      {name: "gym shorts", brand: "Aerie", category: "summer"},
-      {name: "warm sweater", brand: "Aerie", category: "winter"}, #5
-      {name: "long fleece pants", brand: "Aerie", category: "winter"},
-      {name: "blouse", brand: "Aerie", category: "spring"},
-      {name: "mini skirt", brand: "Aerie", category: "spring"},
-      {name: "loose sweater", brand: "Aerie", category: "fall"},
-      {name: "maxi skirt", brand: "Aerie", category: "fall"},
+      { name: "classic white tee", brand: "Aerie", category: "country" }, # 1
+      { name: "denim jeans", brand: "Aerie", category: "country" },
+      { name: "loose tee", brand: "Aerie", category: "summer" },
+      { name: "gym shorts", brand: "Aerie", category: "summer" },
+      { name: "warm sweater", brand: "Aerie", category: "winter" }, # 5
+      { name: "long fleece pants", brand: "Aerie", category: "winter" },
+      { name: "blouse", brand: "Aerie", category: "spring" },
+      { name: "mini skirt", brand: "Aerie", category: "spring" },
+      { name: "loose sweater", brand: "Aerie", category: "fall" },
+      { name: "maxi skirt", brand: "Aerie", category: "fall" }
 ]
 
 catalog.each do |attrs|

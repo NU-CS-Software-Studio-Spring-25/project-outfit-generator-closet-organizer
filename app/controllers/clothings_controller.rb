@@ -9,7 +9,9 @@ class ClothingsController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @clothing = Clothing.find(params[:id]); 
+  end
 
   def new
     @clothing = Clothing.new
@@ -24,7 +26,9 @@ class ClothingsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    @clothing = Clothing.find(params[:id]); 
+  end
 
   def update
     if @clothing.update(clothing_params)
@@ -37,7 +41,11 @@ class ClothingsController < ApplicationController
   def destroy
     @clothing = Clothing.find(params[:id])
     @clothing.destroy
+<<<<<<< HEAD
     redirect_to clothings_path, notice: "Clothing item deleted."
+=======
+    redirect_to clothing_index_path, notice: 'Clothing item was successfully deleted.'
+>>>>>>> 54e69caeef0c6da5f1415c4be2fb1931b336817a
   end
 
   private
@@ -47,6 +55,6 @@ class ClothingsController < ApplicationController
   end
 
   def clothing_params
-    params.require(:clothing).permit(:name, :brand, :category)
+    params.require(:clothing).permit(:name, :brand, :category, :image)
   end
 end
