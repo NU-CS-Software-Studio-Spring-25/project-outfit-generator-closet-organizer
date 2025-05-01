@@ -9,7 +9,9 @@ class ClothingsController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @clothing = Clothing.find(params[:id]); 
+  end
 
   def new
     @clothing = Clothing.new
@@ -24,7 +26,9 @@ class ClothingsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    @clothing = Clothing.find(params[:id]); 
+  end
 
   def update
     if @clothing.update(clothing_params)
@@ -41,11 +45,7 @@ class ClothingsController < ApplicationController
 
   private
 
-  def set_clothing
-    @clothing = Clothing.find(params[:id])
-  end
-
   def clothing_params
-    params.require(:clothing).permit(:name, :brand, :category)
+    params.require(:clothing).permit(:name, :brand, :category, :image)
   end
 end

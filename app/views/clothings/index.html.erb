@@ -25,7 +25,8 @@
         <td>
           <%= link_to 'Show', clothing_path(clothing), class: "btn btn-info" %> |
           <%= link_to 'Edit', edit_clothing_path(clothing), class: "btn btn-warning" %> |
-          <%= link_to 'Delete', clothing_path(clothing), method: :delete, data: { confirm: 'Are you sure you want to delete this item?' }, class: "btn btn-danger" %>
+          <%= link_to 'Delete', clothing_path(clothing), method: :delete, 
+          data: { confirm: 'Are you sure you want to delete this item?' }, class: "btn btn-danger" %>
         </td>
       </tr>
     <% end %>

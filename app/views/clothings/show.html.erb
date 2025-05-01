@@ -1,0 +1,9 @@
+<h1><%= @clothing.name %></h1>
+<p><%= @clothing.brand %></p>
+<p><%= @clothing.category %></p>
+
+<% if @clothing.image.attached? %>
+  <%= image_tag @clothing.image, width: 300 %>
+<% else %>
+  <p>No image uploaded.</p>
+<% end %>
