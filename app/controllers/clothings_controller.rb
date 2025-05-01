@@ -45,6 +45,10 @@ class ClothingsController < ApplicationController
 
   private
 
+  def set_clothing
+    @clothing = Clothing.find(params[:id])
+  end
+
   def clothing_params
     params.require(:clothing).permit(:name, :brand, :category, :image)
   end
