@@ -10,10 +10,12 @@
 
 
   <body>
-    <nav class="navbar navbar-expand-smra navbar-light bg-secondary py-1 px-2">
+    <nav class="navbar navbar-expand-sm navbar-light bg-secondary py-1 px-2">
       <div class="container-fluid">
         <a class="navbar-brand" href="<%= root_path %>">Outfit Generator</a> 
+      </div>
     </nav>
-    <%= yield %>
+    <div class = "my-2 mx-3"> <%= yield %> </div>
+
   </body>
 </html>
