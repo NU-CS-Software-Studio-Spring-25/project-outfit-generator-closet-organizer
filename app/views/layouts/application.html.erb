@@ -9,14 +9,18 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload" %>
   </head>
 
+  <body> 
+  <nav class="navbar navbar-expand-sm" style="background-color: #5f1e9c;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="<%= root_path %>">
+        <img src="<%= asset_path('home_button.png') %>" alt="Home" width="40" height="40" class="d-inline-block align-text-top">
+      </a>
+    </div>
+  </nav>
 
-  <body>
-    <nav class="navbar navbar-expand-sm navbar-light bg-secondary py-1 px-2">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="<%= root_path %>">Outfit Generator</a> 
-      </div>
-    </nav>
-    <div class = "my-2 mx-3"> <%= yield %> </div>
-    
+  <div class="my-2 mx-3"> <%= yield %> </div>
+</body>
+
+
   </body>
 </html>

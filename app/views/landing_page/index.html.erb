@@ -1,12 +1,17 @@
-<h1 >Welcome to the Outfit Generator</h1>
-<p>Enter a word to generate an outfit!</p>
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+  <div class="card shadow-lg p-4" style="width: 100%; max-width: 500px;">
+    <h1 class="display-5 text-center mb-3">Welcome to Outfit Generator</h1>
+    <p class="lead text-center mb-4">Enter a word to generate an outfit!</p>
 
-<%= form_with url: clothings_path, method: :get, local: true do |form| %>
-  <div class="mb-3">
-    <%= form.label :category, "Enter Category" %>
-    <%= form.text_field :category, class: "form-control", placeholder: "e.g. spring" %>
+    <%= form_with url: clothings_path, method: :get, local: true do |form| %>
+      <div class="mb-3">
+        <%= form.label :category, "Enter keyphrase/word", class: "form-label" %>
+        <%= form.text_field :category, class: "form-control", placeholder: "e.g. spring" %>
+      </div>
+      <div class="d-grid gap-2">
+        <%= form.submit "Search", class: "btn btn-success", style: "background-color: #63169e; border: none;" %>
+        <%= link_to 'Browse Catalog', clothings_path, class: "btn btn-primary", style: "background-color: #161f9e; border: none;" %>
+      </div>
+    <% end %>
   </div>
-  <%= form.submit "Search", class: "btn btn-success" %>
-<% end %>
-
-<%= link_to 'Browse Clothing', clothings_path, class: "btn btn-primary mt-3" %>
+</div>
