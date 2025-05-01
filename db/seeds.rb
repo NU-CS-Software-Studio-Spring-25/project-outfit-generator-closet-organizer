@@ -8,6 +8,8 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+Clothing.destroy_all
+
 catalog = [
       { name: "classic white tee", brand: "Aerie", category: "country" }, # 1
       { name: "denim jeans", brand: "Aerie", category: "country" },
@@ -22,7 +24,7 @@ catalog = [
 ]
 
 catalog.each do |attrs|
-  Clothing.create!(attrs)
+  Clothing.find_or_create_by!(attrs)
 end
 
 puts "Seeded #{Clothing.count} clothing items."
