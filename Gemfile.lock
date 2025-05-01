@@ -401,7 +401,7 @@ DEPENDENCIES
   propshaft
   puma (>= 5.0)
   rails (~> 8.0.2)
-  rake (~> 13.0)
+  rake
   rubocop-rails-omakase
   sassc-rails
   selenium-webdriver
