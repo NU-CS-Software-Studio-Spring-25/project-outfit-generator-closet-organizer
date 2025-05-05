@@ -3,12 +3,20 @@ class ClothingsController < ApplicationController
 
   def index
     if params[:category].present?
-      @clothings = Clothing.where("category ILIKE ?", "%#{params[:category]}%")
-      @no_results = @clothings.empty?
+      if user_signed_in?
+        @clothings = Clothing.where("category ILIKE ?", "%#{params[:category]}%").where("user_id IS NULL OR user_id = ?", current_user.id)
+      else
+        @clothings = Clothing.where("category ILIKE ?", "%#{params[:category]}%").where(user_id: nil)
+      end
     else
-      @clothings = Clothing.all
-      @no_results = false
+      if user_signed_in?
+        @clothings = Clothing.where("user_id IS NULL OR user_id = ?", current_user.id)
+      else
+        @clothings = Clothing.where(user_id: nil)
+      end
     end
+    
+    @no_results = @clothings.empty?
   end
 
   def show
@@ -20,7 +28,7 @@ class ClothingsController < ApplicationController
   end
 
   def create
-    @clothing = Clothing.new(clothing_params)
+    @clothing = current_user.clothings.build(clothing_params)
     if @clothing.save
       redirect_to clothings_path, notice: "Clothing item was successfully created."
     else
