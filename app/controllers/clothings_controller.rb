@@ -3,9 +3,11 @@ class ClothingsController < ApplicationController
 
   def index
     if params[:category].present?
-      @clothings = Clothing.where(category: params[:category].downcase)
+      @clothings = Clothing.where("category ILIKE ?", "%#{params[:category]}%")
+      @no_results = @clothings.empty?
     else
       @clothings = Clothing.all
+      @no_results = false
     end
   end
 
