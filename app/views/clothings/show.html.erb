@@ -8,5 +8,6 @@
   <p>No image uploaded.</p>
 <% end %>
 
-<%= link_to "← Back to Clothing List", clothings_path, class: "btn btn-secondary mt-3" %>
+<%= link_to "← Back", request.referer || clothings_path, class: "btn btn-secondary mt-3" %>
+
 
