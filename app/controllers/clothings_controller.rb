@@ -1,12 +1,22 @@
 class ClothingsController < ApplicationController
-  before_action :set_clothing, only: %i[show edit update destroy]
+  before_action :set_clothing, only: [:show, :edit, :update, :destroy, :confirm_destroy]
 
   def index
     if params[:category].present?
-      @clothings = Clothing.where(category: params[:category].downcase)
+      if user_signed_in?
+        @clothings = Clothing.where("category ILIKE ?", "%#{params[:category]}%").where("user_id IS NULL OR user_id = ?", current_user.id)
+      else
+        @clothings = Clothing.where("category ILIKE ?", "%#{params[:category]}%").where(user_id: nil)
+      end
     else
-      @clothings = Clothing.all
+      if user_signed_in?
+        @clothings = Clothing.where("user_id IS NULL OR user_id = ?", current_user.id)
+      else
+        @clothings = Clothing.where(user_id: nil)
+      end
     end
+    
+    @no_results = @clothings.empty?
   end
 
   def show
@@ -18,7 +28,7 @@ class ClothingsController < ApplicationController
   end
 
   def create
-    @clothing = Clothing.new(clothing_params)
+    @clothing = current_user.clothings.build(clothing_params)
     if @clothing.save
       redirect_to clothings_path, notice: "Clothing item was successfully created."
     else
@@ -41,8 +51,8 @@ class ClothingsController < ApplicationController
   def destroy
     @clothing = Clothing.find(params[:id])
     @clothing.destroy
-    redirect_to clothings_path, notice: "Clothing item deleted."
-  end
+    redirect_to clothings_path, notice: 'Clothing item was successfully deleted.'
+  end   
 
   private
 
@@ -51,6 +61,6 @@ class ClothingsController < ApplicationController
   end
 
   def clothing_params
-    params.require(:clothing).permit(:name, :brand, :category, :image)
+    params.require(:clothing).permit(:name, :brand, :category, :article, :image)
   end
 end
