@@ -8,10 +8,10 @@
 
   <div>
     <%= form.label :brand %>
-    <%= form.text_field :brand %>
+    <%= form.text_field :brand, class: "form-control" %>
   </div>
 
-  <div>
+  <div class="form-group">
     <%= form.label :category %>
     <%= form.text_field :category %>
   </div>
@@ -19,6 +19,11 @@
   <div>
     <%= form.label :image %>
     <%= form.file_field :image %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :article %>
+    <%= form.text_field :article, class: "form-control" %>
   </div>
 
   <%= form.submit "Update Item" %>

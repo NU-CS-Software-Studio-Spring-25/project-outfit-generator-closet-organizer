@@ -2,6 +2,7 @@
 
 <p><strong>Brand:</strong> <%= @clothing.brand %></p>
 <p><strong>Category:</strong> <%= @clothing.category %></p>
+<p><strong>Category:</strong> <%= @clothing.article %></p>
 
 <%= form_with url: clothing_path(@clothing), method: :delete, local: true do %>
   <%= submit_tag "Yes, delete", class: "btn btn-danger" %>
