@@ -4,6 +4,7 @@ class CreateClothings < ActiveRecord::Migration[8.0]
       t.string :name
       t.string :brand
       t.string :category
+      t.string :article
 
       t.timestamps
     end
