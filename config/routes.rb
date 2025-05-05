@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   # root "posts#index"
   root "landing_page#index"
   resources :clothings
+
 end
