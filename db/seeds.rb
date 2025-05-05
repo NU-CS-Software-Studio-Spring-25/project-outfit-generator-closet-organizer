@@ -9,16 +9,16 @@
 #   end
 
 catalog = [
-      { name: "classic white tee", brand: "Aerie", category: "country" }, # 1
-      { name: "denim jeans", brand: "Aerie", category: "country" },
-      { name: "loose tee", brand: "Aerie", category: "summer" },
-      { name: "gym shorts", brand: "Aerie", category: "summer" },
-      { name: "warm sweater", brand: "Aerie", category: "winter" }, # 5
-      { name: "long fleece pants", brand: "Aerie", category: "winter" },
-      { name: "blouse", brand: "Aerie", category: "spring" },
-      { name: "mini skirt", brand: "Aerie", category: "spring" },
-      { name: "loose sweater", brand: "Aerie", category: "fall" },
-      { name: "maxi skirt", brand: "Aerie", category: "fall" }
+      { name: "classic white tee", brand: "Aerie", category: "country", article: "top" }, # 1
+      { name: "denim jeans", brand: "Aerie", category: "country", article: "bottom" },
+      { name: "loose tee", brand: "Aerie", category: "summer", article: "top" },
+      { name: "gym shorts", brand: "Aerie", category: "summer", article: "bottom" },
+      { name: "warm sweater", brand: "Aerie", category: "winter", article: "top" }, # 5
+      { name: "long fleece pants", brand: "Aerie", category: "winter", article: "bottom" },
+      { name: "blouse", brand: "Aerie", category: "spring", article: "top" },
+      { name: "mini skirt", brand: "Aerie", category: "spring", article: "bottom" },
+      { name: "loose sweater", brand: "Aerie", category: "fall", article: "top" },
+      { name: "maxi skirt", brand: "Aerie", category: "fall", article: "bottom" }
 ]
 
 catalog.each do |attrs|

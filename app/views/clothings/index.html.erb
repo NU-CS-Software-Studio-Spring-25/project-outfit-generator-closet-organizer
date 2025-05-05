@@ -19,6 +19,7 @@
         <th>Name</th>
         <th>Brand</th>
         <th>Category</th>
+        <th>Article</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -28,6 +29,7 @@
           <td><%= clothing.name %></td>
           <td><%= clothing.brand %></td>
           <td><%= clothing.category %></td>
+          <td><%= clothing.article %></td>
           <td>
             <%= link_to 'Show', clothing_path(clothing), class: "btn btn-info" %> |
             <%= link_to 'Edit', edit_clothing_path(clothing), class: "btn btn-warning" %> |
