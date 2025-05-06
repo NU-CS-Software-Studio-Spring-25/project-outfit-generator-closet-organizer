@@ -1,4 +1,5 @@
 class ClothingsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_clothing, only: [:show, :edit, :update, :destroy, :confirm_destroy]
 
   def index

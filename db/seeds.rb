@@ -11,7 +11,7 @@
 Clothing.destroy_all
 
 catalog = [
-      { name: "classic white tee", brand: "Aerie", category: "country", article: "top" }, # 1
+      { name: "classic white tee", brand: "test", category: "country", article: "top" }, # 1
       { name: "denim jeans", brand: "Aerie", category: "country", article: "bottom" },
       { name: "loose tee", brand: "Aerie", category: "summer", article: "top" },
       { name: "gym shorts", brand: "Aerie", category: "summer", article: "bottom" },
