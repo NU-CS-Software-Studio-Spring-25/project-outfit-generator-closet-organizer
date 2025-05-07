@@ -1,0 +1,9 @@
+<h1>Are you sure you want to delete "<%= @outfit.name %>"?</h1>
+
+<p><strong>Outfit:</strong> <%= @outfit.name %></p>
+
+<%= form_with url: outfit_path(@outfit), method: :delete, local: true do %>
+  <%= submit_tag "Yes, delete", class: "btn btn-danger" %>
+  <%= link_to "Cancel", request.referer || outfits_path, class: "btn btn-secondary" %>
+<% end %>
+

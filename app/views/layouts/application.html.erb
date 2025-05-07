@@ -16,6 +16,10 @@
         <img src="<%= asset_path('home_button.png') %>" alt="Home" width="40" height="40" class="d-inline-block align-text-top ">
       </a>
 
+      <div>
+        <%= link_to 'My Outfits', outfits_path, class: "btn btn-light btn-sm me-2" %>
+      </div>
+
       <div class="ms-auto">
         <% if user_signed_in? %>
           <span class="text-white me-2">Hello, <%= current_user.email %></span>
@@ -28,23 +32,21 @@
     </div>
   </nav>
 
+  <% if notice %>
+    <div class="alert alert-success alert-dismissible fade show mt-2 mx-3" role="alert">
+      <%= notice %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% end %>
+
+  <% if alert %>
+    <div class="alert alert-danger alert-dismissible fade show mt-2 mx-3" role="alert">
+      <%= alert %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% end %>
+
   <div class="my-2 mx-3"> <%= yield %> </div>
 </body>
 
-<% if notice %>
-  <div class="alert alert-success alert-dismissible fade show mt-2 mx-3" role="alert">
-    <%= notice %>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
-<% end %>
-
-<% if alert %>
-  <div class="alert alert-danger alert-dismissible fade show mt-2 mx-3" role="alert">
-    <%= alert %>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
-<% end %>
-
-
-  </body>
 </html>
