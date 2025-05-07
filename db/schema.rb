@@ -48,6 +48,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_07_195058) do
     t.string "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "tags"
+    t.string "article"
     t.bigint "user_id"
     t.index ["user_id"], name: "index_clothings_on_user_id"
   end
