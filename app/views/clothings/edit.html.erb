@@ -1,34 +1,59 @@
-<h1>Edit Clothing Item</h1>
+<h1 class="text-center mb-4">Edit Clothing Item</h1>
 
 <%= form_with model: @clothing, local: true do |form| %>
-  <div class="form-group">
-    <%= form.label :name %>
+  <div class="card-body text-center">
+
+    <!-- Display clothing image or fallback message -->
+    <% if @clothing.image.attached? %>
+      <%= image_tag @clothing.image, class: "img-fluid rounded mb-3", style: "max-height: 300px;" %>
+    <% else %>
+      <div class="border p-4 mb-3 text-muted" style="height: 300px; display: flex; align-items: center; justify-content: center;">
+        <em>There is no image associated with this item.</em>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- name of clothing item -->
+  <div class="mb-3">
+    <%= form.label :name, class: "form-label" %>
     <%= form.text_field :name, class: "form-control" %>
   </div>
 
-  <div class="form-group">
-    <%= form.label :brand %>
+  <!-- Brand name -->
+  <div class="mb-3">
+    <%= form.label :brand, class: "form-label" %>
     <%= form.text_field :brand, class: "form-control" %>
   </div>
 
-  <div class="form-group">
-    <%= form.label :category %>
+  <!-- Enter category for clothing (can be more than one) -->
+  <div class="mb-3">
+    <%= form.label :category, class: "form-label" %>
     <%= form.text_field :category, class: "form-control" %>
   </div>
 
-  <div class="form-group">
-    <%= form.label :article %>
-    <%= form.text_field :article, class: "form-control" %>
+  <!-- assign article type: top or bottom -->
+  <div class="mb-3">
+    <%= form.label :article, "Choose article type:", class: "form-label d-block" %>
+
+    <div class="btn-group" role="group" aria-label="Article">
+      <input type="radio" class="btn-check" name="clothing[article]" id="article-top" value="top" <%= 'checked' if @clothing.article == "top" %>>
+      <label class="btn btn-outline-primary" for="article-top">Top</label>
+
+      <input type="radio" class="btn-check" name="clothing[article]" id="article-bottom" value="bottom" <%= 'checked' if @clothing.article == "bottom" %>>
+      <label class="btn btn-outline-primary" for="article-bottom">Bottom</label>
+    </div>
   </div>
 
-  <div class="form-group">
-    <%= form.label :image %>
+  <!-- optional image -->
+  <div class="mb-3">
+    <%= form.label :image, class: "form-label" %>
     <%= form.file_field :image, class: "form-control" %>
   </div>
 
-  <div class = "mt-3">
-    <%= form.submit class: "btn btn-primary" %>
+  <!-- Submit Button -->
+  <div class="d-grid gap-2 mt-4">
+    <%= form.submit "Update Item", class: "btn btn-success", style: "background-color: #161f9e; border: none;" %>
+    <%= link_to "← Back", request.referer || catalog_path, class: "btn btn-secondary" %>
   </div>
-<% end %>
 
-<%= link_to "← Back", request.referer || clothings_path, class: "btn btn-secondary mt-3" %>
+<% end %>

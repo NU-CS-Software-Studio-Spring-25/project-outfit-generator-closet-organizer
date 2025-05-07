@@ -1,0 +1,54 @@
+<div class="container py-4">
+  <h1 class="text-center mb-4">Clothing Catalog</h1>
+
+  <% if defined?(@no_results) && @no_results %>
+    <div class="alert alert-warning text-center">
+      Sorry, we don't have anything in the catalog for that category.
+      <br>
+      <%= link_to 'Return to home?', root_path, class: 'btn btn-link mt-2' %>
+    </div>
+  <% else %>
+
+    <% if params[:category].present? %>
+      <p class="text-center mb-4">
+        Showing results for category: 
+        <strong><%= params[:category].capitalize %></strong>
+      </p>
+    <% end %>
+
+    <div class="table-responsive">
+      <table class="table table-striped align-middle text-center shadow-sm">
+        <thead class="table-dark">
+          <tr>
+            <th>Name</th>
+            <th>Brand</th>
+            <th>Category</th>
+            <th>Article</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @clothings.each do |clothing| %>
+            <tr>
+              <td><%= clothing.name %></td>
+              <td><%= clothing.brand %></td>
+              <td><%= clothing.category.capitalize %></td>
+              <td><%= clothing.article.capitalize %></td>
+              <td>
+                <%= link_to 'Show', clothing_path(clothing), class: "btn btn-sm btn-info me-1" %>
+                <%= link_to 'Edit', edit_clothing_path(clothing), class: "btn btn-sm btn-warning me-1" %>
+                <%= link_to 'Delete', confirm_destroy_clothing_path(clothing), class: "btn btn-sm btn-danger" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="d-flex justify-content-center gap-3 mt-4">
+      <%= link_to 'New Clothing Item', new_clothing_path, class: "btn btn-success" %>
+      <%= link_to '← Back to Home', root_path, class: "btn btn-secondary" %>
+    </div>
+
+  <% end %>
+</div>

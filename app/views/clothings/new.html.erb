@@ -16,11 +16,20 @@
     <%= form.text_field :category, class: "form-control" %>
   </div>
 
-  <div class="form-group">
-    <%= form.label :article %>
-    <%= form.text_field :article, class: "form-control" %>
+  <!-- assign article type: top or bottom -->
+  <div class="mb-3">
+    <%= form.label :article, "Choose article type:", class: "form-label d-block" %>
+
+    <div class="btn-group" role="group" aria-label="Article">
+      <input type="radio" class="btn-check" name="clothing[article]" id="article-top" value="top" <%= 'checked' if @clothing.article == "top" %>>
+      <label class="btn btn-outline-primary" for="article-top">Top</label>
+
+      <input type="radio" class="btn-check" name="clothing[article]" id="article-bottom" value="bottom" <%= 'checked' if @clothing.article == "bottom" %>>
+      <label class="btn btn-outline-primary" for="article-bottom">Bottom</label>
+    </div>
   </div>
 
+  <!-- optional image -->
   <div>
     <%= form.label :image %>
     <%= form.file_field :image, class: "form-control" %>
