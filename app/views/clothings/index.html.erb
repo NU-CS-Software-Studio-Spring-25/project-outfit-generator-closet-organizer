@@ -1,47 +1,57 @@
-<h1>Clothing Items</h1>
+<h1 class="text-center mb-4">Outfit Results for "<%= params[:category].capitalize %>"</h1>
 
-<% if defined?(@no_results) && @no_results %>
-  <div class="alert alert-warning mt-4 text-center">
-    Sorry, we don't have anything in the catalog for that category.
-    <%= link_to 'Return to home?', root_path, class: 'btn btn-link' %>
+<div class="row justify-content-center">
+  <!-- Top -->
+  <div class="col-md-4">
+    <div class="card shadow-sm mb-4">
+      <div class="card-body text-center">
+        <h5 class="card-title">Top</h5>
+
+        <% if @top %>
+          <% if @top.image.attached? %>
+            <%= image_tag @top.image, class: "img-fluid rounded mb-2", style: "max-height: 200px;" %>
+          <% end %>
+          <p><strong><%= @top.name %></strong></p>
+          <p><%= @top.brand %></p>
+          <p class="text-muted"><%= @top.category %></p>
+        <% else %>
+          <p class="text-muted">There is no top that matches this category.</p>
+        <% end %>
+      </div>
+    </div>
   </div>
-<% else %>
-  <% if params[:category].present? %>
-    <p>
-      Showing results for category: 
-      <strong><%= params[:category].capitalize %></strong>
-    </p>
-  <% end %>
-  
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Brand</th>
-        <th>Category</th>
-        <th>Article</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @clothings.each do |clothing| %>
-        <tr>
-          <td><%= clothing.name %></td>
-          <td><%= clothing.brand %></td>
-          <td><%= clothing.category %></td>
-          <td><%= clothing.article %></td>
-          <td>
-            <%= link_to 'Show', clothing_path(clothing), class: "btn btn-info" %> |
-            <%= link_to 'Edit', edit_clothing_path(clothing), class: "btn btn-warning" %> |
-            <%= link_to 'Delete', confirm_destroy_clothing_path(clothing), class: "btn btn-danger" %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
 
-  <div>
-    <%= link_to 'New Clothing Item', new_clothing_path, class: "btn btn-primary" %>
-    <%= link_to '← Back to Home', root_path, class: "btn btn-secondary" %>
+  <!-- Bottom -->
+  <div class="col-md-4">
+    <div class="card shadow-sm mb-4">
+      <div class="card-body text-center">
+        <h5 class="card-title">Bottom</h5>
+
+        <% if @bottom %>
+          <% if @bottom.image.attached? %>
+            <%= image_tag @bottom.image, class: "img-fluid rounded mb-2", style: "max-height: 200px;" %>
+          <% end %>
+          <p><strong><%= @bottom.name %></strong></p>
+          <p><%= @bottom.brand %></p>
+          <p class="text-muted"><%= @bottom.category %></p>
+        <% else %>
+          <p class="text-muted">There is no bottom that matches this category.</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="text-center">
+  <%= link_to '← Try Another Category', root_path, class: "btn btn-secondary" %>
+</div>
+<!-- randomize the outfit again  -->
+<% if params[:category].present? %>
+  <div class="text-center mt-4">
+    <%= form_with url: clothings_path, method: :get, local: true do |form| %>
+      <%= form.hidden_field :category, value: params[:category] %>
+      <%= form.submit '🎲 Randomize Outfit Again', class: "btn btn-outline-primary" %>
+    <% end %>
   </div>
 <% end %>
+

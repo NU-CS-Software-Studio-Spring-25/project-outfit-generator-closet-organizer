@@ -5,12 +5,12 @@
 
     <%= form_with url: clothings_path, method: :get, local: true do |form| %>
       <div class="mb-3">
-        <%= form.label :category, "Enter keyphrase/word", class: "form-label" %>
+        <%= form.label :category, "Enter word", class: "form-label" %>
         <%= form.text_field :category, class: "form-control", placeholder: "e.g. spring" %>
       </div>
       <div class="d-grid gap-2">
         <%= form.submit "Search", class: "btn btn-success", style: "background-color: #63169e; border: none;" %>
-        <%= link_to 'Browse Catalog', clothings_path, class: "btn btn-primary", style: "background-color: #161f9e; border: none;" %>
+        <%= link_to 'Browse Catalog', catalog_path, class: "btn btn-primary", style: "background-color: #161f9e; border: none;" %>
       </div>
     <% end %>
   </div>

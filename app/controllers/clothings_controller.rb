@@ -1,67 +1,71 @@
 class ClothingsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
-  before_action :set_clothing, only: [:show, :edit, :update, :destroy, :confirm_destroy]
+  before_action :edit, only: [:show, :edit, :update, :destroy, :confirm_destroy]
 
   def index
-    if params[:category].present?
-      if user_signed_in?
-        @clothings = Clothing.where("category ILIKE ?", "%#{params[:category]}%").where("user_id IS NULL OR user_id = ?", current_user.id)
-      else
-        @clothings = Clothing.where("category ILIKE ?", "%#{params[:category]}%").where(user_id: nil)
-      end
-    else
-      if user_signed_in?
-        @clothings = Clothing.where("user_id IS NULL OR user_id = ?", current_user.id)
-      else
-        @clothings = Clothing.where(user_id: nil)
-      end
+    if params[:category].blank?
+      @top = @bottom = nil
+      @no_results = true
+      return
     end
-    
-    @no_results = @clothings.empty?
+  
+    category = params[:category].to_s.downcase
+  
+    scope = user_signed_in? ?
+      Clothing.where("user_id IS NULL OR user_id = ?", current_user.id) :
+      Clothing.where(user_id: nil)
+  
+    scoped_category = scope.where("LOWER(category) = ?", category)
+  
+    @top = scoped_category.where("LOWER(article) = ?", "top").order("RANDOM()").first
+    @bottom = scoped_category.where("LOWER(article) = ?", "bottom").order("RANDOM()").first
+  
+    @no_results = @top.nil? && @bottom.nil?
   end
 
-  def show
+  def catalog # display everything we got
+    @clothings = Clothing.all
+  end
+  
+
+  def show #one particular item
     @clothing = Clothing.find(params[:id]); 
   end
 
-  def new
+  def new #create new clothing item
     @clothing = Clothing.new
   end
 
-  def create
+  def create #confirm and save the creation
     @clothing = current_user.clothings.build(clothing_params)
     if @clothing.save
-      redirect_to clothings_path, notice: "Clothing item was successfully created."
+      redirect_to catalog_path, notice: "Clothing item was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
   end
 
-  def edit
+  def edit #edit existing clothing
     @clothing = Clothing.find(params[:id]); 
   end
 
-  def update
+  def update # helper to edit, confirm and save edit
     if @clothing.update(clothing_params)
-      redirect_to clothings_path, notice: "Clothing item was successfully updated."
+      redirect_to catalog_path, notice: "Clothing item was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
-  def destroy
+  def destroy # destroy and confirm 
     @clothing = Clothing.find(params[:id])
     @clothing.destroy
-    redirect_to clothings_path, notice: 'Clothing item was successfully deleted.'
+    redirect_to catalog_path, notice: 'Clothing item was successfully deleted.'
   end   
 
   private
 
-  def set_clothing
-    @clothing = Clothing.find(params[:id])
-  end
-
-  def clothing_params
+  def clothing_params # define allowed parameters
     params.require(:clothing).permit(:name, :brand, :category, :article, :image)
   end
 end
