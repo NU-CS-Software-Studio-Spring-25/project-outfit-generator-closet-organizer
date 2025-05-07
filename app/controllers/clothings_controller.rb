@@ -1,6 +1,6 @@
 class ClothingsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
-  before_action :edit, only: [:show, :edit, :update, :destroy, :confirm_destroy]
+  before_action :set_clothing, only: [:show, :edit, :update, :destroy, :confirm_destroy]
 
   def index
     if params[:category].blank?
@@ -11,9 +11,19 @@ class ClothingsController < ApplicationController
   
     category = params[:category].to_s.downcase
   
-    scope = user_signed_in? ?
-      Clothing.where("user_id IS NULL OR user_id = ?", current_user.id) :
-      Clothing.where(user_id: nil)
+    scope =
+      if user_signed_in?
+        if current_user.admin?
+          # Admins only see general items
+          Clothing.where(user_id: nil)
+        else
+          # Regular users see general + their own
+          Clothing.where("user_id IS NULL OR user_id = ?", current_user.id)
+        end
+      else
+        # Not signed in = general items only
+        Clothing.where(user_id: nil)
+      end
   
     scoped_category = scope.where("LOWER(category) = ?", category)
   
@@ -22,9 +32,17 @@ class ClothingsController < ApplicationController
   
     @no_results = @top.nil? && @bottom.nil?
   end
+    
 
-  def catalog # display everything we got
-    @clothings = Clothing.all
+  def catalog
+    if current_user&.admin?
+      @clothings = Clothing.where(user_id: nil)
+    else
+      # Exclude hidden items for the current user
+      @clothings = Clothing
+        .where("user_id IS NULL OR user_id = ?", current_user.id)
+        .where.not(id: current_user.hidden_clothing_items.select(:id))
+    end
   end
   
 
@@ -37,7 +55,12 @@ class ClothingsController < ApplicationController
   end
 
   def create #confirm and save the creation
-    @clothing = current_user.clothings.build(clothing_params)
+    if current_user.admin?
+      @clothing = Clothing.new(clothing_params)
+    else
+      @clothing = current_user.clothings.build(clothing_params)
+    end
+
     if @clothing.save
       redirect_to catalog_path, notice: "Clothing item was successfully created."
     else
@@ -47,23 +70,53 @@ class ClothingsController < ApplicationController
 
   def edit #edit existing clothing
     @clothing = Clothing.find(params[:id]); 
+
+    if @clothing.user_id.nil? || @clothing.user != current_user
+      redirect_to catalog_path, alert: "You can't edit this item."
+    end
   end
 
-  def update # helper to edit, confirm and save edit
+  def update
+    @clothing = Clothing.find(params[:id])
+    
+    if @clothing.user_id.nil? || @clothing.user != current_user
+      redirect_to catalog_path, alert: "You can't update this item."
+      return
+    end
+  
     if @clothing.update(clothing_params)
       redirect_to catalog_path, notice: "Clothing item was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
   end
+  
 
-  def destroy # destroy and confirm 
+  def destroy
     @clothing = Clothing.find(params[:id])
-    @clothing.destroy
-    redirect_to catalog_path, notice: 'Clothing item was successfully deleted.'
-  end   
+  
+    if @clothing.user_id.nil?
+      # It's an admin item — hide it from the user instead of deleting
+      if user_signed_in?
+        current_user.hidden_clothing_items << @clothing unless current_user.hidden_clothing_items.include?(@clothing)
+        redirect_to catalog_path, notice: "Clothing item hidden from your view."
+      else
+        redirect_to catalog_path, alert: "You must be signed in to hide items."
+      end
+    elsif @clothing.user == current_user || current_user.admin?
+      # User-owned item or admin deleting
+      @clothing.destroy
+      redirect_to catalog_path, notice: "Clothing item was successfully deleted."
+    else
+      redirect_to catalog_path, alert: "You can't delete this item."
+    end
+  end    
 
   private
+  def set_clothing #find clothing item by id
+    @clothing = Clothing.find(params[:id])
+  end
+
 
   def clothing_params # define allowed parameters
     params.require(:clothing).permit(:name, :brand, :category, :article, :image)

@@ -13,6 +13,9 @@
           <% end %>
           <p><strong><%= @top.name %></strong></p>
           <p><%= @top.brand %></p>
+          <% if @top.user == current_user %>
+            <%= link_to 'Edit', edit_clothing_path(@top), class: "btn btn-warning btn-sm mt-2" %>
+          <% end %>
           <p class="text-muted"><%= @top.category %></p>
         <% else %>
           <p class="text-muted">There is no top that matches this category.</p>
@@ -33,6 +36,9 @@
           <% end %>
           <p><strong><%= @bottom.name %></strong></p>
           <p><%= @bottom.brand %></p>
+          <% if @bottom.user == current_user %>
+            <%= link_to 'Edit', edit_clothing_path(@bottom), class: "btn btn-warning btn-sm mt-2" %>
+          <% end %>
           <p class="text-muted"><%= @bottom.category %></p>
         <% else %>
           <p class="text-muted">There is no bottom that matches this category.</p>
