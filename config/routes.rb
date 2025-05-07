@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   root "landing_page#index"
   resources :clothings
 
+  get 'catalog', to: 'clothings#catalog', as: 'catalog'
+
   resources :clothings do
     member do
       get 'confirm_destroy'
@@ -31,8 +33,7 @@ Rails.application.routes.draw do
 
     resources :outfit_items, only: [:create, :destroy]  # Create and destroy actions
   end
-  
-  
 
+  
 
 end
