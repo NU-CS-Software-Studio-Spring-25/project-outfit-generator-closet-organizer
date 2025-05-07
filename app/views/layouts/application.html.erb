@@ -12,9 +12,9 @@
   <body> 
   <nav class="navbar navbar-expand-sm" style="background-color: #5f1e9c;">
     <div class="container-fluid">
-      <a class="navbar-brand" href="<%= root_path %>" style="background-color: #f3e8ff; display: inline-block; padding: 3px; border-radius: 5px;">
-        <img src="<%= asset_path('home_button.png') %>" alt="Home" width="40" height="40" class="d-inline-block align-text-top ">
-      </a>
+    <a class="navbar-brand" href="<%= root_path %>" style="padding: 3px; border-radius: 5px;">
+      <img src="<%= asset_path('home_button.png') %>" alt="Home" width="40" height="40" class="d-inline-block align-text-top" style="background-color: transparent;">
+    </a>
 
       <div>
         <%= link_to 'My Outfits', outfits_path, class: "btn btn-light btn-sm me-2" %>
@@ -31,8 +31,9 @@
       </div>
     </div>
   </nav>
+</body>
 
-  <% if notice %>
+    <% if notice %>
     <div class="alert alert-success alert-dismissible fade show mt-2 mx-3" role="alert">
       <%= notice %>
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -46,7 +47,7 @@
     </div>
   <% end %>
 
-  <div class="my-2 mx-3"> <%= yield %> </div>
+  <div class="my-2 mx-3"> <%= yield %> </div>  
 </body>
 
 </html>
