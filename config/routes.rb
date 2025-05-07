@@ -15,7 +15,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   root "landing_page#index"
-  resources :clothings
+  get 'catalog', to: 'clothings#catalog', as: 'catalog' # routes to "catalog.html" instead of index
+    # index instead is used to display one top and one bottom
+  resources :clothings # generates full set of restful routes for clothings
 
   get 'catalog', to: 'clothings#catalog', as: 'catalog'
 
