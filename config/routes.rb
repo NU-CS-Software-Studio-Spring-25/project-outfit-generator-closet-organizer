@@ -34,6 +34,7 @@ Rails.application.routes.draw do
     resources :outfit_items, only: [:create, :destroy]  # Create and destroy actions
   end
 
+  resources :outfit_items, only: [:create, :destroy]
   
 
 end
