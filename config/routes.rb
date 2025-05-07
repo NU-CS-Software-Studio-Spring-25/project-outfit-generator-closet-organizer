@@ -19,8 +19,6 @@ Rails.application.routes.draw do
     # index instead is used to display one top and one bottom
   resources :clothings # generates full set of restful routes for clothings
 
-  get 'catalog', to: 'clothings#catalog', as: 'catalog'
-
   resources :clothings do
     member do
       get 'confirm_destroy'
