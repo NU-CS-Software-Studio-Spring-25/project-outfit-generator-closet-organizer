@@ -24,6 +24,15 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :outfits do
+    member do
+      get 'confirm_destroy'
+    end
+
+    resources :outfit_items, only: [:create, :destroy]  # Create and destroy actions
+  end
+  
+  
 
 
 end

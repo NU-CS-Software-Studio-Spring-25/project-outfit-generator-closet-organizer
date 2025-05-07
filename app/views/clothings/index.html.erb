@@ -31,9 +31,29 @@
           <td><%= clothing.category %></td>
           <td><%= clothing.article %></td>
           <td>
-            <%= link_to 'Show', clothing_path(clothing), class: "btn btn-info" %> |
-            <%= link_to 'Edit', edit_clothing_path(clothing), class: "btn btn-warning" %> |
+            <div class="d-flex justify-content-between gap-2">
+            <%= link_to 'Show', clothing_path(clothing), class: "btn btn-info" %> 
+            <%= link_to 'Edit', edit_clothing_path(clothing), class: "btn btn-warning" %> 
+
+            <% if current_user.outfits.any? %>
+              <%= form_with url: outfit_outfit_items_path(current_user.outfits.first), method: :post, local: true do %>
+                <%= hidden_field_tag :clothing_id, clothing.id %>
+                <div class="d-flex justify-content gap-2">
+                  <%= select_tag :outfit_id,
+                        options_from_collection_for_select(current_user.outfits, :id, :name),
+                        prompt: "Select an Outfit",
+                        class: "form-select form-select-sm" %>
+                  <%= submit_tag "Add", class: "btn btn-success" %>
+                </div>
+              <% end %>
+              <%= link_to 'New Outfit', new_outfit_path, class: "btn btn-primary" %> 
+            <% else %>
+              <!-- Show "Create an Outfit" if no outfits exist -->
+              <%= link_to 'New Outfit', new_outfit_path, class: "btn btn-primary" %> 
+            <% end %>
+
             <%= link_to 'Delete', confirm_destroy_clothing_path(clothing), class: "btn btn-danger" %>
+            </div>
           </td>
         </tr>
       <% end %>
