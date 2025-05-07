@@ -35,9 +35,9 @@
               <td><%= clothing.category.capitalize %></td>
               <td><%= clothing.article.capitalize %></td>
               <td>
-                <%= link_to 'Show', clothing_path(clothing), class: "btn btn-sm btn-info me-1" %>
-                <%= link_to 'Edit', edit_clothing_path(clothing), class: "btn btn-sm btn-warning me-1" %>
-                <%= link_to 'Delete', confirm_destroy_clothing_path(clothing), class: "btn btn-sm btn-danger" %>
+                  <%= link_to 'Show', clothing_path(clothing), class: "btn btn-sm btn-info me-1" %>
+                  <%= link_to 'Edit', edit_clothing_path(clothing), class: "btn btn-sm btn-warning me-1" %>
+                  <%= link_to 'Delete', confirm_destroy_clothing_path(clothing), class: "btn btn-sm btn-danger" %>
               </td>
             </tr>
           <% end %>
