@@ -8,14 +8,14 @@
     <% @outfit.outfit_items.includes(:clothing).each do |item| %>
       <% clothing = item.clothing %>
       <div class="col-md-4 mb-3">
-        <div class="card h-100">
-          <div class="card-body">
+        <div class="card shadow-sm mb-4">
+          <div class="card-body text-center">
             <h5 class="card-title"><%= clothing.name %></h5>
             <p class="card-text"><%= clothing.category %></p>
-            <% if @clothing.image.attached? %>
-                <%= image_tag @clothing.image, class: "card-img-top", style: "object-fit: cover; height: 300px;" %>
+            <% if clothing.image.attached? %>
+                <%= image_tag clothing.image, class: "img-fluid rounded mb-2", style: "max-height: 200px;" %>
             <% else %>
-                <div class="card-img-top d-flex justify-content-center align-items-center bg-light" style="height: 300px;">
+                <div class: "img-fluid rounded mb-2", style: "max-height: 200px;">
                 <p class="text-muted">No image uploaded.</p>
                 </div>
             <% end %>
