@@ -17,7 +17,7 @@
         <div class="card h-100">
         <div class="card-body">
             <h5 class="card-title"><%= outfit.name %></h5>
-            <p class="card-text">Created at: <%= outfit.created_at.strftime("%b %d, %Y") %></p>
+            <p class="card-text">Created on: <%= outfit.created_at.strftime("%b %d, %Y") %></p>
         </div>
         <div class="card-footer d-flex justify-content-between">
             <%= link_to 'Show', outfit_path(outfit), class: "btn btn-info" %>
