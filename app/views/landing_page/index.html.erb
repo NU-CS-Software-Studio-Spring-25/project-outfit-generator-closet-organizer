@@ -6,7 +6,7 @@
     <%= form_with url: clothings_path, method: :get, local: true do |form| %>
       <div class="mb-3">
         <%= form.label :category, "Enter word", class: "form-label" %>
-        <%= form.text_field :category, class: "form-control", placeholder: "e.g. spring" %>
+        <%= form.text_field :category, class: "form-control", placeholder: "e.g. spring", required: true, oninvalid: "this.setCustomValidity('You need to search something to create an outfit!')", oninput: "setCustomValidity('')" %>
       </div>
       <div class="d-grid gap-2">
         <%= form.submit "Search", class: "btn btn-success", style: "background-color: #63169e; border: none;" %>
