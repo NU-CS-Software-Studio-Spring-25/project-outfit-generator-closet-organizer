@@ -117,7 +117,6 @@ class ClothingsController < ApplicationController
     @clothing = Clothing.find(params[:id])
   end
 
-
   def clothing_params # define allowed parameters
     params.require(:clothing).permit(:name, :brand, :category, :article, :image)
   end

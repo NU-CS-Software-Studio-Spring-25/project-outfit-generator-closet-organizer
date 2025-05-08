@@ -1,35 +1,32 @@
 <div class="d-flex justify-content-between mb-3">
-    <h1>Outfits</h1>
-    <%= link_to 'New Outfit', new_outfit_path, class: "btn btn-primary mb-3 mt-2" %>
+  <h1>Outfits</h1>
+  <%= link_to 'New Outfit', new_outfit_path, class: "btn btn-primary mb-3 mt-2" %>
 </div>
 
-<% if defined?(@no_results) && @no_results %>
-  <div class="alert alert-warning mt-4 text-center">
-    You do not have any outfits yet.
-    <%= link_to 'Return to home?', root_path, class: 'btn btn-link' %>
-    <%= link_to 'Create an outfit', new_outfit_path, class: 'btn btn-link' %>
+<% if @outfits.empty? %>
+  <div class="alert alert-info mt-4 text-center">
+    No outfits to display. You haven't made any outfits yet!
   </div>
 <% else %>
-
-    <div class="row">
+  <div class="row">
     <% @outfits.each do |outfit| %>
-    <div class="col-md-4 mb-4">
+      <div class="col-md-4 mb-4">
         <div class="card h-100">
-        <div class="card-body">
+          <div class="card-body">
             <h5 class="card-title"><%= outfit.name %></h5>
             <p class="card-text">Created at: <%= outfit.created_at.strftime("%b %d, %Y") %></p>
-        </div>
-        <div class="card-footer d-flex justify-content-between">
+          </div>
+          <div class="card-footer d-flex justify-content-between">
             <%= link_to 'Show', outfit_path(outfit), class: "btn btn-info" %>
             <%= link_to 'Edit', edit_outfit_path(outfit), class: "btn btn-warning" %>
             <%= link_to 'Delete', confirm_destroy_outfit_path(outfit), class: "btn btn-danger" %>
+          </div>
         </div>
-        </div>
-    </div>
+      </div>
     <% end %>
-    </div>
-
+  </div>
 <% end %>
+
 
 
     
