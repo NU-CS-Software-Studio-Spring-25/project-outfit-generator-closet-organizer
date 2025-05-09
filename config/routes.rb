@@ -2,6 +2,11 @@ Rails.application.routes.draw do
   devise_for :users
   get "navbar/index"
   get "landing_page/index"
+  get "/ebay_search", to: "ebay#search_form"
+  post "/ebay_results", to: "ebay#results"
+  post '/ebay/deletion', to: 'ebay#deletion'
+
+
   # user page
   get '/account', to: 'users#account', as: 'account'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

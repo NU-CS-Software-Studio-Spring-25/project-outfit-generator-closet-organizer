@@ -1,0 +1,6 @@
+<h1>Search eBay</h1>
+<%= form_with url: "/ebay_results", method: :post, local: true do %>
+  <%= label_tag :query, "What are you looking for?" %>
+  <%= text_field_tag :query %>
+  <%= submit_tag "Search" %>
+<% end %>

@@ -1,0 +1,14 @@
+<h1>Search Results</h1>
+<% if @items.present? %>
+  <ul>
+    <% @items.each do |item| %>
+      <li>
+        <strong><%= item["title"] %></strong><br>
+        <%= image_tag item["image"]["imageUrl"], width: 100 if item.dig("image", "imageUrl") %><br>
+        <%= link_to "View on eBay", item["itemWebUrl"], target: "_blank" %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No results found.</p>
+<% end %>
