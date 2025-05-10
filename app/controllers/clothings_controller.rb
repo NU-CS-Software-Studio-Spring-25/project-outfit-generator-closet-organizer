@@ -73,13 +73,16 @@ class ClothingsController < ApplicationController
     end
   end
 
-  def edit #edit existing clothing
-    @clothing = Clothing.find(params[:id]); 
-
-    if @clothing.user_id.nil? || @clothing.user != current_user
+  def edit
+    @clothing = Clothing.find(params[:id])
+  
+    if current_user.admin?
+      # Admins can edit anything
+      return
+    elsif @clothing.user != current_user
       redirect_to catalog_path, alert: "You can't edit this item."
     end
-  end
+  end  
 
   def update
     @clothing = Clothing.find(params[:id])
@@ -101,21 +104,24 @@ class ClothingsController < ApplicationController
     @clothing = Clothing.find(params[:id])
   
     if @clothing.user_id.nil?
-      # It's an admin item — hide it from the user instead of deleting
-      if user_signed_in?
+      if current_user.admin?
+        # Admin deleting a public item — delete it fully
+        @clothing.destroy
+        redirect_to catalog_path, notice: "Admin item successfully deleted."
+      elsif user_signed_in?
+        # Regular user — soft hide from this user's view
         current_user.hidden_clothing_items << @clothing unless current_user.hidden_clothing_items.include?(@clothing)
-        redirect_to catalog_path, notice: "Clothing item hidden from your view."
+        redirect_to catalog_path, notice: "Item hidden from your view."
       else
         redirect_to catalog_path, alert: "You must be signed in to hide items."
       end
     elsif @clothing.user == current_user || current_user.admin?
-      # User-owned item or admin deleting
       @clothing.destroy
-      redirect_to catalog_path, notice: "Clothing item was successfully deleted."
+      redirect_to catalog_path, notice: "Item successfully deleted."
     else
       redirect_to catalog_path, alert: "You can't delete this item."
     end
-  end    
+  end      
 
   private
   def set_clothing #find clothing item by id

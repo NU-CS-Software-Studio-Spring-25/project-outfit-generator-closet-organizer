@@ -1,6 +1,9 @@
 class Clothing < ApplicationRecord
     has_one_attached :image
     belongs_to :user, optional: true
+    has_many :hidden_by_users, through: :hidden_clothings, source: :user
+    has_many :hidden_clothings, dependent: :destroy
+
 
     before_validation :downcase_article
     validates :article, presence: true, inclusion: {
