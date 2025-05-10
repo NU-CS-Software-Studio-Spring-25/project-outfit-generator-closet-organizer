@@ -8,10 +8,15 @@ class Clothing < ApplicationRecord
             message: "%{value} is not valid. Please categorize this item as either a 'top' or 'bottom'"
 
     }
+    validate :image_presence
 
     private
 
     def downcase_article # make case-insensitive
         self.article = article.to_s.downcase
     end
+
+    def image_presence
+        errors.add(:image, "must be attached") unless image.attached?
+      end
 end
