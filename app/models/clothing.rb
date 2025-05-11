@@ -12,6 +12,7 @@ class Clothing < ApplicationRecord
 
     }
     validate :image_presence
+    validate :acceptable_image
 
     private
 
@@ -20,6 +21,16 @@ class Clothing < ApplicationRecord
     end
 
     def image_presence
-        errors.add(:image, "must be attached") unless image.attached?
+        errors.add(:image, "You must add an image of this item.") unless image.attached?
       end
+
+    def acceptable_image
+        return unless image.attached?
+
+        acceptable_types = ["image/png", "image/jpeg", "image/jpg", "image/heic"]
+
+        unless acceptable_types.include?(image.content_type)
+            errors.add(:image, "must be a PNG, JPG, or HEIC file")
+        end
+    end
 end
