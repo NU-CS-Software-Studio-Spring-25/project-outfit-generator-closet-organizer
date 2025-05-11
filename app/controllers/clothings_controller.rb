@@ -34,13 +34,19 @@ class ClothingsController < ApplicationController
   end
     
   def catalog
-    base_scope = if current_user&.admin?
-      Clothing.where(user_id: nil)
+    if current_user&.admin?
+      base_scope = Clothing.where(user_id: nil)
     else
-      Clothing
-        .where("user_id IS NULL OR user_id = ?", current_user.id)
-        .where.not(id: current_user.hidden_clothing_items.select(:id))
+      base_scope = Clothing
+                     .where("user_id = ? OR user_id IS NULL", current_user.id)
+                     .where.not(id: current_user.hidden_clothing_items.select(:id))
+  
+      if params[:hide_admin] == "true"
+        base_scope = base_scope.where.not(user_id: nil) # Exclude admin items
+      end
     end
+
+  
   
     if params[:article].present?
       @clothings = base_scope.where("LOWER(article) = ?", params[:article].downcase)
@@ -49,7 +55,7 @@ class ClothingsController < ApplicationController
     end
   
     @no_results = @clothings.empty?
-  end
+  end  
 
   def show #one particular item
     @clothing = Clothing.find(params[:id]); 

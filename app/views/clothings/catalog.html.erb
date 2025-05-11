@@ -8,6 +8,16 @@
       <%= link_to 'Return to home?', root_path, class: 'btn btn-link mt-2' %>
     </div>
   <% else %>
+  
+  <% if user_signed_in? && !current_user.admin? %>
+  <div class="form-check d-flex justify-content-center mb-3">
+    <input type="checkbox" class="form-check-input me-2" id="hideAdminToggle"
+      <%= 'checked' if params[:hide_admin] == 'true' %>
+      onchange="window.location='?<%= request.query_parameters.merge(hide_admin: params[:hide_admin] == 'true' ? nil : true).to_query %>'">
+    <label class="form-check-label" for="hideAdminToggle">Hide Admin Items</label>
+  </div>
+<% end %>
+
   <div class="d-flex justify-content-center mb-4">
   <%= link_to "All", catalog_path, class: "btn btn-outline-primary me-2 #{'active' unless params[:article]}" %>
   <%= link_to "Tops", catalog_path(article: 'top'), class: "btn btn-outline-primary me-2 #{'active' if params[:article] == 'top'}" %>
