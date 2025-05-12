@@ -1,59 +1,64 @@
-<h1 class="text-center mb-4">Edit Clothing Item</h1>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-sm p-4">
+        <h2 class="text-center mb-4 text-primary">Edit Clothing Item</h2>
 
-<%= form_with model: @clothing, local: true do |form| %>
-  <div class="card-body text-center">
+        <%= form_with model: @clothing, local: true do |form| %>
+          <!-- Image preview -->
+          <div class="text-center mb-4">
+            <% if @clothing.image.attached? %>
+              <%= image_tag @clothing.image, class: "img-fluid rounded", style: "max-height: 300px;" %>
+            <% else %>
+              <div class="border p-4 text-muted" style="height: 300px; display: flex; align-items: center; justify-content: center;">
+                <em>There is no image associated with this item.</em>
+              </div>
+            <% end %>
+          </div>
 
-    <!-- Display clothing image or fallback message -->
-    <% if @clothing.image.attached? %>
-      <%= image_tag @clothing.image, class: "img-fluid rounded mb-3", style: "max-height: 300px;" %>
-    <% else %>
-      <div class="border p-4 mb-3 text-muted" style="height: 300px; display: flex; align-items: center; justify-content: center;">
-        <em>There is no image associated with this item.</em>
+          <!-- Name -->
+          <div class="mb-3">
+            <%= form.label :name, class: "form-label" %>
+            <%= form.text_field :name, class: "form-control", placeholder: "Enter clothing name" %>
+          </div>
+
+          <!-- Brand -->
+          <div class="mb-3">
+            <%= form.label :brand, class: "form-label" %>
+            <%= form.text_field :brand, class: "form-control", placeholder: "Enter brand" %>
+          </div>
+
+          <!-- Category -->
+          <div class="mb-3">
+            <%= form.label :category, class: "form-label" %>
+            <%= form.text_field :category, class: "form-control", placeholder: "e.g. Spring, Casual" %>
+          </div>
+
+          <!-- Article (radio buttons) -->
+          <div class="mb-3">
+            <%= form.label :article, "Choose Article Type:", class: "form-label d-block" %>
+            <div class="btn-group" role="group" aria-label="Article">
+              <input type="radio" class="btn-check" name="clothing[article]" id="article-top" value="top" <%= 'checked' if @clothing.article == "top" %>>
+              <label class="btn btn-outline-primary" for="article-top">Top</label>
+
+              <input type="radio" class="btn-check" name="clothing[article]" id="article-bottom" value="bottom" <%= 'checked' if @clothing.article == "bottom" %>>
+              <label class="btn btn-outline-primary" for="article-bottom">Bottom</label>
+            </div>
+          </div>
+
+          <!-- Image upload -->
+          <div class="mb-3">
+            <%= form.label :image, "Upload New Image", class: "form-label" %>
+            <%= form.file_field :image, class: "form-control", accept: ".png,.jpg,.jpeg,.heic" %>
+          </div>
+
+          <!-- Actions -->
+          <div class="d-flex justify-content-between mt-4">
+            <%= form.submit "Update Item", class: "btn btn-success" %>
+            <%= link_to "← Back", request.referer || catalog_path, class: "btn btn-secondary" %>
+          </div>
+        <% end %>
       </div>
-    <% end %>
-  </div>
-
-  <!-- name of clothing item -->
-  <div class="mb-3">
-    <%= form.label :name, class: "form-label" %>
-    <%= form.text_field :name, class: "form-control" %>
-  </div>
-
-  <!-- Brand name -->
-  <div class="mb-3">
-    <%= form.label :brand, class: "form-label" %>
-    <%= form.text_field :brand, class: "form-control" %>
-  </div>
-
-  <!-- Enter category for clothing (can be more than one) -->
-  <div class="mb-3">
-    <%= form.label :category, class: "form-label" %>
-    <%= form.text_field :category, class: "form-control" %>
-  </div>
-
-  <!-- assign article type: top or bottom -->
-  <div class="mb-3">
-    <%= form.label :article, "Choose article type:", class: "form-label d-block" %>
-
-    <div class="btn-group" role="group" aria-label="Article">
-      <input type="radio" class="btn-check" name="clothing[article]" id="article-top" value="top" <%= 'checked' if @clothing.article == "top" %>>
-      <label class="btn btn-outline-primary" for="article-top">Top</label>
-
-      <input type="radio" class="btn-check" name="clothing[article]" id="article-bottom" value="bottom" <%= 'checked' if @clothing.article == "bottom" %>>
-      <label class="btn btn-outline-primary" for="article-bottom">Bottom</label>
     </div>
   </div>
-
-  <!-- optional image -->
-  <div class="mb-3">
-    <%= form.label :image, class: "form-label" %>
-    <%= form.file_field :image, class: "form-control" %>
-  </div>
-
-  <!-- Submit Button -->
-  <div class="d-grid gap-2 mt-4">
-    <%= form.submit "Update Item", class: "btn btn-success", style: "background-color: #161f9e; border: none;" %>
-    <%= link_to "← Back", request.referer || catalog_path, class: "btn btn-secondary" %>
-  </div>
-
-<% end %>
+</div>

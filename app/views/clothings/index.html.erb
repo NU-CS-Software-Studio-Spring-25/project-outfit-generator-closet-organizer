@@ -11,7 +11,11 @@
         <% if @top %>
           <% if @top.image.attached? %>
             <%= image_tag @top.image, class: "img-fluid rounded mb-2", style: "max-height: 200px;" %>
-          <% end %>
+          <% else %>
+            <div class="border p-3 mb-2 text-muted" style="height: 200px; display: flex; align-items: center; justify-content: center;">
+              <em>No Image</em>
+            </div>
+            <% end %>
           <p><strong><%= @top.name %></strong></p>
           <p><%= @top.brand %></p>
           <% if @top.user == current_user %>
@@ -34,10 +38,10 @@
                     <%= submit_tag "Add", class: "btn btn-success" %>
                   </div>
                 <% end %>
-              <%= link_to 'New Outfit', new_outfit_path, class: "btn btn-primary mt-2" %> 
+              <%= link_to 'Add to New Outfit', new_outfit_path, class: "btn btn-primary mt-2" %> 
             <% else %>
               <!-- Show "Create an Outfit" if no outfits exist -->
-              <%= link_to 'New Outfit', new_outfit_path, class: "btn btn-primary mt" %> 
+              <%= link_to 'Add to New Outfit', new_outfit_path, class: "btn btn-primary mt" %> 
             <% end %>
           <% end %>
       </div>
@@ -53,7 +57,11 @@
         <% if @bottom %>
           <% if @bottom.image.attached? %>
             <%= image_tag @bottom.image, class: "img-fluid rounded mb-2", style: "max-height: 200px;" %>
-          <% end %>
+          <% else %>
+            <div class="border p-3 mb-2 text-muted" style="height: 200px; display: flex; align-items: center; justify-content: center;">
+              <em>No Image</em>
+            </div>
+            <% end %>
           <p><strong><%= @bottom.name %></strong></p>
           <p><%= @bottom.brand %></p>
           <% if @bottom.user == current_user %>
@@ -76,10 +84,10 @@
                   <%= submit_tag "Add", class: "btn btn-success" %>
                 </div>
               <% end %>
-            <%= link_to 'New Outfit', new_outfit_path, class: "btn btn-primary mt-2" %> 
+            <%= link_to 'Add to New Outfit', new_outfit_path, class: "btn btn-primary mt-2" %> 
           <% else %>
             <!-- Show "Create an Outfit" if no outfits exist -->
-            <%= link_to 'New Outfit', new_outfit_path, class: "btn btn-primary mt" %> 
+            <%= link_to 'Add to New Outfit', new_outfit_path, class: "btn btn-primary mt" %> 
           <% end %>
         <% end %>
 

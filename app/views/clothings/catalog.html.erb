@@ -8,6 +8,29 @@
       <%= link_to 'Return to home?', root_path, class: 'btn btn-link mt-2' %>
     </div>
   <% else %>
+  
+  <% if user_signed_in? && !current_user.admin? %>
+  <div class="form-check d-flex justify-content-center mb-3">
+    <input type="checkbox" class="form-check-input me-2" id="hideAdminToggle"
+      <%= 'checked' if params[:hide_admin] == 'true' %>
+      onchange="window.location='?<%= request.query_parameters.merge(hide_admin: params[:hide_admin] == 'true' ? nil : true).to_query %>'">
+    <label class="form-check-label" for="hideAdminToggle">Hide Admin Items</label>
+  </div>
+<% end %>
+
+  <div class="d-flex justify-content-center mb-4">
+  <%= link_to "All", catalog_path, class: "btn btn-outline-primary me-2 #{'active' unless params[:article]}" %>
+  <%= link_to "Tops", catalog_path(article: 'top'), class: "btn btn-outline-primary me-2 #{'active' if params[:article] == 'top'}" %>
+  <%= link_to "Bottoms", catalog_path(article: 'bottom'), class: "btn btn-outline-primary #{'active' if params[:article] == 'bottom'}" %>
+</div>
+
+<% if user_signed_in? %>
+  <div class="text-center mt-4">
+    <%= link_to 'Add New Clothing Item', new_clothing_path, class: "btn btn-success" %>
+  </div>
+  <br>
+<% end %>
+
 
     <% if params[:category].present? %>
       <p class="text-center mb-4">
@@ -16,39 +39,34 @@
       </p>
     <% end %>
 
-    <div class="table-responsive">
-      <table class="table table-striped align-middle text-center shadow-sm">
-        <thead class="table-dark">
-          <tr>
-            <th>Name</th>
-            <th>Brand</th>
-            <th>Category</th>
-            <th>Article</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @clothings.each do |clothing| %>
-            <tr>
-              <td><%= clothing.name %></td>
-              <td><%= clothing.brand %></td>
-              <td><%= clothing.category.capitalize %></td>
-              <td><%= clothing.article.capitalize %></td>
-              <td>
-                  <%= link_to 'Show', clothing_path(clothing), class: "btn btn-sm btn-info me-1" %>
-                  <%= link_to 'Edit', edit_clothing_path(clothing), class: "btn btn-sm btn-warning me-1" %>
-                  <%= link_to 'Delete', confirm_destroy_clothing_path(clothing), class: "btn btn-sm btn-danger" %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    <% @clothings.each do |clothing| %>
+        <div class="col">
+          <div class="card h-100 shadow-sm">
+            <% if clothing.image.attached? %>
+              <%= link_to clothing_path(clothing) do %>
+                <%= image_tag clothing.image, class: "card-img-top", style: "object-fit: cover; height: 300px;" %>
+              <% end %>
+            <% else %>
+              <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 300px;">
+                <span class="text-muted">No Image</span>
+              </div>
+            <% end %>
+            <div class="card-body d-flex flex-column justify-content-between">
+  <div>
+    <h5 class="card-title"><%= clothing.name %></h5>
+    <p class="card-text text-muted"><%= clothing.brand %> — <%= clothing.category %></p>
+  </div>
+
+  <div class="d-flex justify-content-end gap-2 mt-3">
+  <%= link_to 'Edit', edit_clothing_path(clothing), class: "btn btn-sm", style: "background-color: #e6ccff; color: black;" %>
+  <%= link_to 'Delete', confirm_destroy_clothing_path(clothing), class: "btn btn-sm btn-danger" %>
+</div>
+</div>
+          </div>
+        </div>
+      <% end %>
     </div>
 
-    <div class="d-flex justify-content-center gap-3 mt-4">
-      <%= link_to 'New Clothing Item', new_clothing_path, class: "btn btn-success" %>
-      <%= link_to '← Back to Home', root_path, class: "btn btn-secondary" %>
-    </div>
-
-  <% end %>
+  <% end %> <!-- This is the missing `end` -->
 </div>
