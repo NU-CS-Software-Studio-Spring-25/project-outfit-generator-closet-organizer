@@ -34,28 +34,34 @@ class ClothingsController < ApplicationController
   end
     
   def catalog
+    view_mode = params[:view] || "all"
+
     if current_user&.admin?
+    # Admins only see admin clothing
       base_scope = Clothing.where(user_id: nil)
     else
-      base_scope = Clothing
-                     .where("user_id = ? OR user_id IS NULL", current_user.id)
-                     .where.not(id: current_user.hidden_clothing_items.select(:id))
-  
-      if params[:hide_admin] == "true"
-        base_scope = base_scope.where.not(user_id: nil) # Exclude admin items
-      end
+      base_scope =
+        case view_mode
+        when "admin"
+          Clothing.where(user_id: nil)
+        when "user"
+          Clothing.where(user_id: current_user.id)
+        else # "all"
+          Clothing
+            .where("user_id IS NULL OR user_id = ?", current_user.id)
+            .where.not(id: current_user.hidden_clothing_items.select(:id))
+        end
     end
-
-  
-  
+    
     if params[:article].present?
-      @clothings = base_scope.where("LOWER(article) = ?", params[:article].downcase)
-    else
-      @clothings = base_scope
-    end
-  
-    @no_results = @clothings.empty?
-  end  
+    @clothings = base_scope.where("LOWER(article) = ?", params[:article].downcase)
+  else
+    @clothings = base_scope
+  end
+
+  @no_results = @clothings.empty?
+end
+
 
   def show #one particular item
     @clothing = Clothing.find(params[:id]); 
