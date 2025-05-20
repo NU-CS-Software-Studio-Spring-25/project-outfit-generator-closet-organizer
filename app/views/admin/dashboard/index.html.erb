@@ -1,0 +1,48 @@
+<div class="container py-4">
+  <h1 class="mb-4 text-center">Admin Dashboard</h1>
+
+  <div class="row text-center mb-4">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Total Users</h5>
+          <p class="card-text"><%= User.count %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Clothing Items</h5>
+          <p class="card-text"><%= Clothing.count %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Admin Items</h5>
+          <p class="card-text"><%= Clothing.where(user_id: nil).count %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Recent Users</h3>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Signed Up</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% User.order(created_at: :desc).limit(5).each do |user| %>
+        <tr>
+          <td><%= user.email %></td>
+          <td><%= user.created_at.strftime("%B %d, %Y") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
