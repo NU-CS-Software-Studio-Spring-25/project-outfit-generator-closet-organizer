@@ -45,4 +45,24 @@
       <% end %>
     </tbody>
   </table>
+
+  <h3 class="mt-5">Most Hidden Clothing Items</h3>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Brand</th>
+        <th>Times Hidden</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @most_hidden.each do |clothing, count| %>
+        <tr>
+          <td><%= clothing.name %></td>
+          <td><%= clothing.brand %></td>
+          <td><%= count %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
