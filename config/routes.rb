@@ -39,5 +39,8 @@ Rails.application.routes.draw do
 
   resources :outfit_items, only: [:create, :destroy]
   
+  namespace :admin do
+    get 'dashboard', to: 'dashboard#index'
+  end
 
 end
