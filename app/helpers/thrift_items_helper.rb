@@ -1,0 +1,2 @@
+module ThriftItemsHelper
+end

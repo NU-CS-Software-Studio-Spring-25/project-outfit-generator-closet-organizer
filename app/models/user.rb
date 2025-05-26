@@ -7,4 +7,6 @@ class User < ApplicationRecord
   has_many :outfits
   has_many :hidden_clothings, dependent: :destroy
   has_many :hidden_clothing_items, through: :hidden_clothings, source: :clothing
+  has_many :thrift_items
+
 end

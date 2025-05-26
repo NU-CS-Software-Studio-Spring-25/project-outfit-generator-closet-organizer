@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get "thrift_items/new"
+  get "thrift_items/create"
+  get "thrift_items/index"
   devise_for :users
   get "navbar/index"
   get "landing_page/index"
@@ -42,5 +45,8 @@ Rails.application.routes.draw do
   namespace :admin do
     get 'dashboard', to: 'dashboard#index'
   end
+
+  resources :thrift_items, only: [:index, :new, :create]
+
 
 end

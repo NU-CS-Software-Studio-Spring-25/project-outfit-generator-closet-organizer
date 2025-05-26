@@ -1,0 +1,49 @@
+<div class="container py-4">
+  <h1 class="text-center mb-4">Thrift Store</h1>
+
+  <% if @thrift_items.empty? %>
+    <div class="alert alert-info text-center">
+      No items have been listed for thrift yet.
+    </div>
+  <% else %>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+      <% @thrift_items.each do |item| %>
+        <% clothing = item.clothing %>
+        <div class="col">
+          <div class="card h-100 shadow-sm">
+            <% if clothing.image.attached? %>
+              <%= image_tag clothing.image, class: "card-img-top", style: "object-fit: cover; height: 300px;" %>
+            <% else %>
+              <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 300px;">
+                <span class="text-muted">No Image</span>
+              </div>
+            <% end %>
+
+            <div class="card-body d-flex flex-column justify-content-between">
+              <div>
+                <h5 class="card-title"><%= clothing.name %></h5>
+                <p class="card-text text-muted"><%= clothing.brand %> — <%= clothing.category %></p>
+                <p class="fw-bold mt-2">Price: $<%= number_with_precision(item.price, precision: 2) %></p>
+                <p class="text-muted" style="font-size: 0.9em;">Listed by: <%= item.user.email %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+
+
+<footer class="bg-dark text-white text-center py-3 mt-5">
+  <div class="container">
+    <p class="mb-1">© 2025 Outfit Generator by Faith Do, Crystal Chen, Natalie Hong, Areg Aslanyan</p>
+    <div>
+      <%= link_to "Home", root_path, class: "text-white me-3" %>
+      <%= link_to "Catalog", catalog_path, class: "text-white me-3" %>
+      <%= link_to "Add Item", new_clothing_path, class: "text-white me-3" if user_signed_in? %>
+      <a href="mailto:outfitgen@gmail.com" class="text-white">Contact</a>
+    </div>
+  </div>
+</footer>

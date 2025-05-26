@@ -3,6 +3,8 @@ class Clothing < ApplicationRecord
     belongs_to :user, optional: true
     has_many :hidden_by_users, through: :hidden_clothings, source: :user
     has_many :hidden_clothings, dependent: :destroy
+    has_one :thrift_item
+
 
 
     before_validation :downcase_article
