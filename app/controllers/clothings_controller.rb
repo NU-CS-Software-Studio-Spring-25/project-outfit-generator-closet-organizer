@@ -34,31 +34,37 @@ class ClothingsController < ApplicationController
   end
     
   def catalog
-    view_mode = params[:view] || "all"
-  
-    base_scope = if current_user&.admin?
-      Clothing.where(user_id: nil)
-    else
-      case view_mode
-      when "admin"
-        Clothing.where(user_id: nil)
-      when "user"
-        Clothing.where(user_id: current_user.id)
-      else # "all"
-        Clothing
-          .where("user_id IS NULL OR user_id = ?", current_user.id)
-          .where.not(id: current_user.hidden_clothing_items.select(:id))
-      end
-    end
-  
-    if params[:article].present?
-      base_scope = base_scope.where("LOWER(article) = ?", params[:article].downcase)
-    end
-  
-    @clothings = base_scope.page(params[:page]).per(9)
-  
-    @no_results = @clothings.empty?
+  # Handle filters
+  view_filter = params[:view] || "all"
+  article_filter = params[:article]
+  category_filter = params[:category]
+
+  scope = if current_user
+            Clothing.where("user_id IS NULL OR user_id = ?", current_user.id)
+          else
+            Clothing.where(user_id: nil)
+          end
+
+  if view_filter == "admin"
+    scope = scope.where(user_id: nil)
+  elsif view_filter == "user" && current_user
+    scope = scope.where(user_id: current_user.id)
+  elsif view_filter == "all" && current_user
+    scope = scope.where.not(id: current_user.hidden_clothing_items.select(:id))
   end
+
+  if article_filter.present?
+    scope = scope.where("LOWER(article) = ?", article_filter.downcase)
+  end
+
+  if category_filter.present?
+    scope = scope.where("LOWER(category) = ?", category_filter.downcase)
+  end
+
+  @clothings = scope.order(created_at: :desc).page(params[:page])
+  @no_results = @clothings.empty?
+end
+
   
 
   def show #one particular item
