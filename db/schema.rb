@@ -48,6 +48,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_26_181436) do
     t.string "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.string "tags"
     t.string "article"
     t.string "tags"
     t.bigint "user_id"
