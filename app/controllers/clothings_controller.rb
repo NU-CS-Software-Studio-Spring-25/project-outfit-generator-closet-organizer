@@ -45,9 +45,13 @@ class ClothingsController < ApplicationController
       when "user"
         Clothing.where(user_id: current_user.id)
       else # "all"
-        Clothing
-          .where("user_id IS NULL OR user_id = ?", current_user.id)
-          .where.not(id: current_user.hidden_clothing_items.select(:id))
+        if current_user
+          Clothing
+            .where("user_id IS NULL OR user_id = ?", current_user.id)
+            .where.not(id: current_user.hidden_clothing_items.select(:id))
+        else
+          Clothing.where(user_id: nil)
+        end
       end
     end
   
