@@ -51,8 +51,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_26_181436) do
     t.bigint "user_id"
     t.string "tags"
     t.string "article"
-    t.string "tags"
-    t.bigint "user_id"
     t.index ["user_id"], name: "index_clothings_on_user_id"
   end
 
