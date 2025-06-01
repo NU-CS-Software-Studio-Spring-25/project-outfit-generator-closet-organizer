@@ -3,14 +3,22 @@
 
   <% if defined?(@no_results) && @no_results %>
     <div class="alert alert-warning text-center">
-      Sorry, we don't have anything in the catalog for that category.
-      <br>
       <% if user_signed_in? %>
+      <% if current_user.admin? %>
+        <p>There are no clothing items in the catalog at the moment.</p>
         <%= link_to 'Add the first clothing item!', new_clothing_path, class: 'btn btn-success mt-2' %>
       <% else %>
-        <%= link_to 'Return to home?', root_path, class: 'btn btn-link mt-2' %>
+        <p>There are no clothing items in the catalog for this category.</p>
+        <%= link_to 'Add the first clothing item!', new_clothing_path, class: 'btn btn-success mt-2' %>
       <% end %>
-    </div>
+    <% else %>
+      <% if params[:view] == 'admin' || params[:view].blank? %>
+        <p>These are all admin-updated clothing items. If you want to upload your own clothing items, create an account first.</p>
+      <% else %>
+        <p>There are no clothing items in the catalog at the moment. If you want to add your own clothing, please <%= link_to 'log in', new_user_session_path %> or <%= link_to 'sign up', new_user_registration_path %>.</p>
+      <% end %>
+    <% end %>
+  </div>
   <% else %>
 
   
