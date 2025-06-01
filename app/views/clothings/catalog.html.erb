@@ -5,7 +5,11 @@
     <div class="alert alert-warning text-center">
       Sorry, we don't have anything in the catalog for that category.
       <br>
-      <%= link_to 'Return to home?', root_path, class: 'btn btn-link mt-2' %>
+      <% if user_signed_in? %>
+        <%= link_to 'Add the first clothing item!', new_clothing_path, class: 'btn btn-success mt-2' %>
+      <% else %>
+        <%= link_to 'Return to home?', root_path, class: 'btn btn-link mt-2' %>
+      <% end %>
     </div>
   <% else %>
 
