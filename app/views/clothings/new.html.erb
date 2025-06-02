@@ -1,6 +1,6 @@
 <h1><%= @clothing.new_record? ? "New Clothing Item" : "Edit Clothing Item" %></h1>
 
-<%= form_with(model: @clothing, local: true) do |form| %>
+<%= form_with(model: @clothing, local: true, html: { class: "clothing-form" }) do |form| %>
   <div class="form-group">
     <%= form.label :name %>
     <%= form.text_field :name, class: "form-control", required: true %>
@@ -32,7 +32,7 @@
   <!-- required image -->
   <div>
     <%= form.label :image %>
-    <%= form.file_field :image, class: "form-control", accept: ".png,.jpg,.jpeg,.heic", required: false %>
+    <%= form.file_field :image, class: "form-control", accept: ".png,.jpg,.jpeg,.heic", required: true%>
   </div>
 
   <div class = "mt-3">
