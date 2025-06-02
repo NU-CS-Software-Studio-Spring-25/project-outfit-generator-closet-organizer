@@ -1,9 +1,9 @@
 <h1><%= @clothing.new_record? ? "New Clothing Item" : "Edit Clothing Item" %></h1>
 
-<%= form_with(model: @clothing, local: true) do |form| %>
+<%= form_with(model: @clothing, local: true, html: { class: "clothing-form" }) do |form| %>
   <div class="form-group">
     <%= form.label :name %>
-    <%= form.text_field :name, class: "form-control", required: true %>
+    <%= form.text_field :name, class: "form-control"%>
   </div>
 
   <div class="form-group">
@@ -13,12 +13,12 @@
 
   <div class="form-group">
     <%= form.label :category %>
-    <%= form.text_field :category, class: "form-control", required: true %>
+    <%= form.text_field :category, class: "form-control" %>
   </div>
 
   <!-- assign article type: top or bottom -->
   <div class="mb-3">
-    <%= form.label :article, "Choose article type:", class: "form-label d-block", required: true   %>
+    <%= form.label :article, "Choose article type:", class: "form-label d-block" %>
 
     <div class="btn-group" role="group" aria-label="Article">
       <input type="radio" class="btn-check" name="clothing[article]" id="article-top" value="top" <%= 'checked' if @clothing.article == "top" %>>
@@ -32,7 +32,7 @@
   <!-- required image -->
   <div>
     <%= form.label :image %>
-    <%= form.file_field :image, class: "form-control", accept: ".png,.jpg,.jpeg,.heic", required: false %>
+    <%= form.file_field :image, class: "form-control", accept: ".png,.jpg,.jpeg,.heic"%>
   </div>
 
   <div class = "mt-3">
