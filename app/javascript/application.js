@@ -2,6 +2,5 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 import "bootstrap"
-import Rails from "@rails/ujs"
 import "./validate_new_clothing_form"
 Rails.start()
