@@ -22,7 +22,7 @@
           <li class="list-group-item"><strong>Article:</strong> <%= @clothing.article %></li>
         </ul>
 
-        <%= form_with url: clothing_path(@clothing), method: :delete, local: true do %>
+        <%= form_with url: confirm_destroy_clothing_path(@clothing), method: :delete, local: true do %>
           <div class="d-flex justify-content-between">
             <%= submit_tag "🗑️ Yes, delete", class: "btn btn-danger" %>
             <%= link_to "Cancel", request.referer || clothings_path, class: "btn btn-secondary" %>
