@@ -1,33 +1,26 @@
 <div class="container py-5">
-  <h1 class="text-center mb-4">Frequently Asked Questions</h1>
+  <h1 class="mb-4 text-center">Frequently Asked Questions</h1>
 
   <div class="accordion" id="faqAccordion">
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="headingOne">
-        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
-          What is this website for?
-        </button>
-      </h2>
-      <div id="collapseOne" class="accordion-collapse collapse show">
-        <div class="accordion-body">
-          This is a clothing catalog and outfit generator where you can upload your own clothing, thrift items, and explore combinations.
+    <% faqs = [
+      { question: "How do I upload clothing?", answer: "After logging in, go to the Catalog and click 'Add New Clothing Item'." },
+      { question: "Can I delete someone else's clothing?", answer: "No. You can only delete items you uploaded unless you're an admin." },
+      { question: "What is the Thrift page?", answer: "It's where users can share clothing with others and set a price." }
+    ] %>
+
+    <% faqs.each_with_index do |faq, i| %>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="heading-<%= i %>">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-<%= i %>" aria-expanded="false" aria-controls="collapse-<%= i %>">
+            <%= faq[:question] %>
+          </button>
+        </h2>
+        <div id="collapse-<%= i %>" class="accordion-collapse collapse" aria-labelledby="heading-<%= i %>" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            <%= faq[:answer] %>
+          </div>
         </div>
       </div>
-    </div>
-
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="headingTwo">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
-          Do I need an account to use this?
-        </button>
-      </h2>
-      <div id="collapseTwo" class="accordion-collapse collapse">
-        <div class="accordion-body">
-          You can browse admin-uploaded clothes without logging in, but to upload or hide items, or use the outfit generator, you'll need an account.
-        </div>
-      </div>
-    </div>
-
-    <!-- Add more questions as needed -->
+    <% end %>
   </div>
 </div>
