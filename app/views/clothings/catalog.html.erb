@@ -58,7 +58,7 @@
           <div class="card h-100 shadow-sm">
             <% if clothing.image.attached? %>
               <%= link_to clothing_path(clothing) do %>
-                <%= image_tag clothing.image, class: "card-img-top", style: "object-fit: cover; height: 300px;", alt: "Image of #{clothing.name} - #{clothing.brand} #{clothing.category}" %>
+                <%= image_tag clothing.image, class: "card-img-top", style: "object-fit: cover; height: 300px;", alt: "Image of #{clothing.name} - #{clothing.brand} #{clothing.category}"       %>
               <% end %>
             <% else %>
               <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 300px;">
