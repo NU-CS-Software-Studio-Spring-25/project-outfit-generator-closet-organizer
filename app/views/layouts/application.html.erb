@@ -19,8 +19,8 @@
 
         <div>
           <% if user_signed_in? %>
-            <%= link_to 'My Outfits', outfits_path, class: "btn btn-outline-light btn-sm me-2" %>
-            <%= link_to 'Thrift', thrift_items_path, class: "btn btn-outline-light btn-sm" %>
+            <%= link_to 'My Outfits', outfits_path, class: "btn btn-sm me-2", style: "background-color: #f0f8ff; color: #000;" %>
+            <%= link_to 'Thrift', thrift_items_path, class: "btn btn-sm me-2", style: "background-color: #f0f8ff; color: #000;" %>
           <% end %>
         </div>
 
@@ -28,17 +28,17 @@
           <% if user_signed_in? %>
             <div class="d-flex align-items-center gap-2">
               <span class="text-white">Hello, <%= current_user.email %></span>
-              <%= link_to '⚙️', account_path, class: "btn btn-outline-light btn-sm" %>
+              <%= link_to '⚙️', account_path, class: "btn btn-sm me-2", style: "background-color: #f0f8ff; color: #000;" %>
 
               <% if current_user.admin? %>
-                <%= link_to 'Admin Dashboard', admin_dashboard_path, class: "btn btn-warning btn-sm" %>
+                <%= link_to 'Admin Dashboard', admin_dashboard_path, class: "btn btn-sm me-2", style: "background-color: #f0f8ff; color: #000;" %>
               <% end %>
 
-              <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: "btn btn-outline-light btn-sm" %>
+              <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: "btn btn-sm", style: "background-color: #205375; color: #fff;" %>
             </div>
           <% else %>
-            <%= link_to 'Sign Up', new_user_registration_path, class: "btn btn-light btn-sm me-2" %>
-            <%= link_to 'Login', new_user_session_path, class: "btn btn-primary btn-sm" %>
+          <%= link_to 'Sign Up', new_user_registration_path, class: "btn btn-sm me-2", style: "background-color: #f0f8ff; color: #000;" %>
+          <%= link_to 'Login', new_user_session_path, class: "btn btn-sm", style: "background-color: #205375; color: #fff;" %>          
           <% end %>
         </div>
       </div>
