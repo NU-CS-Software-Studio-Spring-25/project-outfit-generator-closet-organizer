@@ -13,7 +13,7 @@
             <h5 class="card-title"><%= clothing.name %></h5>
             <p class="card-text"><%= clothing.category %></p>
             <% if clothing.image.attached? %>
-                <%= image_tag clothing.image, class: "img-fluid rounded mb-2", style: "max-height: 200px;" %>
+                <%= image_tag clothing.image, class: "img-fluid rounded mb-2", style: "max-height: 200px;", alt: "Image of #{@clothing.name} - #{@clothing.brand} #{@clothing.category}" %>
             <% else %>
                 <div class: "img-fluid rounded mb-2", style: "max-height: 200px;">
                 <p class="text-muted">No image uploaded.</p>

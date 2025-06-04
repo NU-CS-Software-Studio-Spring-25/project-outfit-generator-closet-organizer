@@ -10,7 +10,7 @@
   <!-- Top -->
         <% if @top %>
           <% if @top.image.attached? %>
-            <%= image_tag @top.image, class: "img-fluid rounded mb-2", style: "max-height: 200px;" %>
+            <%= image_tag @top.image, class: "img-fluid rounded mb-2", style: "max-height: 200px;", alt: "Image of #{@clothing.name} - #{@clothing.brand} #{@clothing.category}" %>
           <% else %>
             <div class="border p-3 mb-2 text-muted" style="height: 200px; display: flex; align-items: center; justify-content: center;">
               <em>No Image</em>
@@ -56,7 +56,7 @@
 
         <% if @bottom %>
           <% if @bottom.image.attached? %>
-            <%= image_tag @bottom.image, class: "img-fluid rounded mb-2", style: "max-height: 200px;" %>
+            <%= image_tag @bottom.image, class: "img-fluid rounded mb-2", style: "max-height: 200px;", alt: "Image of #{@clothing.name} - #{@clothing.brand} #{@clothing.category}" %>
           <% else %>
             <div class="border p-3 mb-2 text-muted" style="height: 200px; display: flex; align-items: center; justify-content: center;">
               <em>No Image</em>

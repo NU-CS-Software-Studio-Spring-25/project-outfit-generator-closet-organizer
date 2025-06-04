@@ -1,7 +1,7 @@
 <div class="container mt-5">
   <div class="card shadow-lg" style="max-width: 600px; margin: 0 auto;">
     <% if @clothing.image.attached? %>
-      <%= image_tag @clothing.image, class: "card-img-top", style: "object-fit: cover; height: 300px;" %>
+      <%= image_tag @clothing.image, class: "card-img-top", style: "object-fit: cover; height: 300px;", alt: "Image of #{@clothing.name} - #{@clothing.brand} #{@clothing.category}" %>
     <% else %>
       <div class="card-img-top d-flex justify-content-center align-items-center bg-light" style="height: 300px;">
         <p class="text-muted">No image uploaded.</p>
