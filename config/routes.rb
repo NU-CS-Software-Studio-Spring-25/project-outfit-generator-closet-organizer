@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
+  get "pages/faq"
   get "thrift_items/new"
   get "thrift_items/create"
   get "thrift_items/index"
   devise_for :users
   get "navbar/index"
   get "landing_page/index"
-  
+  get "/faq", to: "pages#faq", as: :faq
+
   # user page
   get '/account', to: 'users#account', as: 'account'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -47,6 +49,7 @@ Rails.application.routes.draw do
   end
 
   resources :thrift_items, only: [:index, :new, :create]
+  
 
 
 end
