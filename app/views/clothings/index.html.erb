@@ -104,7 +104,7 @@
   <div class="text-center mt-4">
     <%= form_with url: clothings_path, method: :get, local: true do |form| %>
       <%= form.hidden_field :category, value: params[:category] %>
-      <%= form.submit '🎲 Randomize Outfit Again', class: "btn btn-outline-primary" %>
+      <%= form.submit '🎲 Randomize Outfit Again', class: "btn btn-primary" %>
     <% end %>
   </div>
 <% end %>
