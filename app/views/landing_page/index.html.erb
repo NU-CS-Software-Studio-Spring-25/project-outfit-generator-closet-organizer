@@ -18,17 +18,4 @@
       </div>
     </div>
   </div>
-
-  <footer class="bg-dark text-white text-center py-3" style="width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw;">
-    <div class="container">
-      <p class="mb-1">© 2025 Outfit Generator by Faith Do, Crystal Chen, Natalie Hong, Areg Aslanyan</p>
-      <div>
-        <%= link_to "Home", root_path, class: "text-white me-3" %>
-        <%= link_to "Catalog", catalog_path, class: "text-white me-3" %>
-        <%= link_to "FAQ", faq_path, class: "text-white me-3" %>
-        <%= link_to "Add Item", new_clothing_path, class: "text-white me-3" if user_signed_in? %>
-        <a href="mailto:outfitgen@gmail.com" class="text-white">Contact</a>
-      </div>
-    </div>
-  </footer>
 </div>
