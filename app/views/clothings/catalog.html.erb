@@ -72,6 +72,25 @@
                 <p class="card-text text-muted"><%= clothing.brand %> — <%= clothing.category %></p>
               </div>
 
+              <% if user_signed_in? %>
+              <% if current_user.outfits.any? %>
+                  <%= form_with url: outfit_items_path, method: :post, local: true do %>
+                    <%= hidden_field_tag :clothing_id %>
+                      <div class="d-flex justify-content gap-2">
+                        <%= select_tag :outfit_id,
+                          options_from_collection_for_select(current_user.outfits, :id, :name),
+                          prompt: "Select an Outfit",
+                          class: "form-select form-select-sm" %>
+                        <%= submit_tag "Add", class: "btn btn-success" %>
+                      </div>
+                    <% end %>
+                  <%= link_to 'Add to New Outfit', new_outfit_path, class: "btn btn-primary mt-2" %> 
+                <% else %>
+                  <!-- Show "Create an Outfit" if no outfits exist -->
+                  <%= link_to 'Add to New Outfit', new_outfit_path, class: "btn btn-primary mt" %> 
+                <% end %>
+              <% end %>
+
               <div class="d-flex justify-content-end gap-2 mt-3 flex-wrap">
               <% unless clothing.thrift_item %>
                 <%= link_to 'Thrift', new_thrift_item_path(clothing_id: clothing.id), class: "btn btn-sm me-2", style: "background-color: #205375; color: white;" %>
