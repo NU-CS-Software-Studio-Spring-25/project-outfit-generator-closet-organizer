@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_05_154945) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_05_153545) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -87,31 +87,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_05_154945) do
     t.index ["user_id"], name: "index_outfits_on_user_id"
   end
 
-  create_table "solid_queue_executions", force: :cascade do |t|
-    t.bigint "job_id", null: false
-    t.datetime "started_at", precision: nil
-    t.datetime "finished_at", precision: nil
-    t.string "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["job_id"], name: "index_solid_queue_executions_on_job_id"
-  end
-
-  create_table "solid_queue_jobs", force: :cascade do |t|
-    t.string "queue_name", null: false
-    t.string "job_class", null: false
-    t.text "arguments"
-    t.datetime "scheduled_at", precision: nil
-    t.datetime "finished_at", precision: nil
-    t.datetime "expired_at", precision: nil
-    t.integer "attempts", default: 0, null: false
-    t.string "last_error"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["queue_name"], name: "index_solid_queue_jobs_on_queue_name"
-    t.index ["scheduled_at"], name: "index_solid_queue_jobs_on_scheduled_at"
-  end
-
   create_table "thrift_items", force: :cascade do |t|
     t.bigint "clothing_id", null: false
     t.bigint "user_id", null: false
@@ -143,7 +118,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_05_154945) do
   add_foreign_key "outfit_items", "clothings"
   add_foreign_key "outfit_items", "outfits"
   add_foreign_key "outfits", "users"
-  add_foreign_key "solid_queue_executions", "solid_queue_jobs", column: "job_id"
   add_foreign_key "thrift_items", "clothings"
   add_foreign_key "thrift_items", "users"
 end
