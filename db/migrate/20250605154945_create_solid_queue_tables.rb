@@ -3,7 +3,7 @@ class CreateSolidQueueTables < ActiveRecord::Migration[7.1]
     create_table :solid_queue_jobs do |t|
       t.string :queue_name, null: false
       t.string :job_class, null: false
-      t.jsonb :arguments
+      t.text :arguments
       t.timestamp :scheduled_at
       t.timestamp :finished_at
       t.timestamp :expired_at

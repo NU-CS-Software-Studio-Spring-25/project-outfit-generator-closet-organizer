@@ -100,7 +100,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_05_154945) do
   create_table "solid_queue_jobs", force: :cascade do |t|
     t.string "queue_name", null: false
     t.string "job_class", null: false
-    t.jsonb "arguments"
+    t.text "arguments"
     t.datetime "scheduled_at", precision: nil
     t.datetime "finished_at", precision: nil
     t.datetime "expired_at", precision: nil
