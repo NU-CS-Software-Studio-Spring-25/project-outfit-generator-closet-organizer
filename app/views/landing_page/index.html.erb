@@ -1,34 +1,34 @@
-<div class="container d-flex justify-content-center align-items-center" style="padding: 100px">
-  <div class="card shadow-lg p-4" style="width: 100%; max-width: 500px;">
-    <img src="<%= asset_path('logo.png') %>" class="card-img-top" alt="Outfit Generator Logo" style="width: 300px; height: 150px; object-fit: cover; object-position: center; margin: 0 auto; display: block;">
-    <h1 class="display-5 text-center mb-3" style="margin-top: -10px">Welcome to Outfit Generator</h1>
-    <p class="lead text-center mb-4">Enter a word to generate an outfit!</p>
-    <%= form_with url: clothings_path, method: :get, local: true do |form| %>
-      <div class="mb-3">
-        <%= form.label :category, "Enter word", class: "form-label" %>
-        <%= form.text_field :category, class: "form-control", placeholder: "e.g. spring", required: true, oninvalid: "this.setCustomValidity('You need to search something to create an outfit!')", oninput: "setCustomValidity('')" %>
+<div class="min-vh-100 d-flex flex-column">
+  <div class="flex-grow-1">
+    <div class="container d-flex justify-content-center align-items-center" style="padding: 100px">
+      <div class="card shadow-lg p-4" style="width: 100%; max-width: 500px;">
+        <img src="<%= asset_path('logo.png') %>" class="card-img-top" alt="Outfit Generator Logo" style="width: 300px; height: 150px; object-fit: cover; object-position: center; margin: 0 auto; display: block;">
+        <h1 class="display-5 text-center mb-3" style="margin-top: -10px">Welcome to Outfit Generator</h1>
+        <p class="lead text-center mb-4">Enter a word to generate an outfit!</p>
+        <%= form_with url: clothings_path, method: :get, local: true do |form| %>
+          <div class="mb-3">
+            <%= form.label :category, "Enter word", class: "form-label" %>
+            <%= form.text_field :category, class: "form-control", placeholder: "e.g. spring", required: true, oninvalid: "this.setCustomValidity('You need to search something to create an outfit!')", oninput: "setCustomValidity('')" %>
+          </div>
+          <div class="d-grid gap-2">
+            <%= form.submit "Search", class: "btn btn-success", style: "background-color: #CD4631; border: none;" %>
+            <%= link_to 'Browse Catalog', catalog_path, class: "btn btn-primary", style: "background-color: #205375; border: none;" %>
+          </div>
+        <% end %>
       </div>
-      <div class="d-grid gap-2">
-        <%= form.submit "Search", class: "btn btn-success", style: "background-color: #CD4631; border: none;" %>
-        <%= link_to 'Browse Catalog', catalog_path, class: "btn btn-primary", style: "background-color: #205375; border: none;" %>
-      </div>
-     
-
-    <% end %>
-  </div>
-</div>
-
-<footer class="bg-dark text-white text-center py-3 mt-5">
-  <div class="container">
-    <p class="mb-1">© 2025 Outfit Generator by Faith Do, Crystal Chen, Natalie Hong, Areg Aslanyan</p>
-    <div>
-      <%= link_to "Home", root_path, class: "text-white me-3" %>
-      <%= link_to "Catalog", catalog_path, class: "text-white me-3" %>
-      <%= link_to "FAQ", faq_path, class: "text-white me-3" %>
-      <%= link_to "Add Item", new_clothing_path, class: "text-white me-3" if user_signed_in? %>
-      <a href="mailto:outfitgen@gmail.com" class="text-white">Contact</a>
-
     </div>
   </div>
-</footer>
 
+  <footer class="bg-dark text-white text-center py-3" style="width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw;">
+    <div class="container">
+      <p class="mb-1">© 2025 Outfit Generator by Faith Do, Crystal Chen, Natalie Hong, Areg Aslanyan</p>
+      <div>
+        <%= link_to "Home", root_path, class: "text-white me-3" %>
+        <%= link_to "Catalog", catalog_path, class: "text-white me-3" %>
+        <%= link_to "FAQ", faq_path, class: "text-white me-3" %>
+        <%= link_to "Add Item", new_clothing_path, class: "text-white me-3" if user_signed_in? %>
+        <a href="mailto:outfitgen@gmail.com" class="text-white">Contact</a>
+      </div>
+    </div>
+  </footer>
+</div>
