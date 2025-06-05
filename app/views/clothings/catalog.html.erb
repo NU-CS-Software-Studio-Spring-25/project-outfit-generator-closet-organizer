@@ -75,7 +75,7 @@
               <% if user_signed_in? %>
               <% if current_user.outfits.any? %>
                   <%= form_with url: outfit_items_path, method: :post, local: true do %>
-                    <%= hidden_field_tag :clothing_id %>
+                    <%= hidden_field_tag :clothing_id, clothing.id %>
                       <div class="d-flex justify-content gap-2">
                         <%= select_tag :outfit_id,
                           options_from_collection_for_select(current_user.outfits, :id, :name),
