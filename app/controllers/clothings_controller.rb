@@ -76,6 +76,9 @@ end
   end
 
   def create #confirm and save the creation
+
+    @clothing = current_user&.admin? ? Clothing.new(clothing_params) : current_user.clothings.build(clothing_params)
+
     if current_user.admin?
       @clothing = Clothing.new(clothing_params)
     else
@@ -90,7 +93,6 @@ end
   end
 
   def edit
-    @clothing = Clothing.find(params[:id])
   
     if current_user.admin?
       # Admins can edit anything
@@ -101,13 +103,11 @@ end
   end  
 
   def update
-    @clothing = Clothing.find(params[:id])
     
     if @clothing.user_id.nil? || @clothing.user != current_user
-      redirect_to catalog_path, alert: "You can't update this item."
-      return
+      redirect_to catalog_path, alert: "You can't update this item." and return
     end
-  
+
     if @clothing.update(clothing_params)
       redirect_to catalog_path, notice: "Clothing item was successfully updated."
     else
@@ -117,7 +117,7 @@ end
   
 
   def destroy
-    @clothing = Clothing.find(params[:id])
+    @clothing from set_clothing
   
     if @clothing.user_id.nil?
       if current_user.admin?

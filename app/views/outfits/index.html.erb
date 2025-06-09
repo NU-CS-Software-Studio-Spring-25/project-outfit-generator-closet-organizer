@@ -2,7 +2,7 @@
 <html lang="en">
 <div class="d-flex justify-content-between mb-3">
   <h1>Outfits</h1>
-  <%= link_to 'New Outfit', new_outfit_path, class: "btn btn-primary mb-3 mt-2", style:"background-color:#81ADC8; border: none;" %>
+  <%= link_to 'New Outfit', new_outfit_path, class: "btn btn-primary mb-3 mt-2", style:"background-color:#205375; border: none;" %>
 </div>
 
 <% if @outfits.empty? %>
@@ -33,16 +33,4 @@
 
     
 
-
-<footer class="bg-dark text-white text-center py-3 mt-5">
-  <div class="container">
-    <p class="mb-1">© 2025 Outfit Generator by Faith Do, Crystal Chen, Natalie Hong, Areg Aslanyan</p>
-    <div>
-      <%= link_to "Home", root_path, class: "text-white me-3" %>
-      <%= link_to "Catalog", catalog_path, class: "text-white me-3" %>
-      <%= link_to "Add Item", new_clothing_path, class: "text-white me-3" if user_signed_in? %>
-      <a href="mailto:outfitgen@gmail.com" class="text-white">Contact</a>
-    </div>
-  </div>
-</footer>
 </html>

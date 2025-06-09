@@ -28,7 +28,7 @@
 
           <div class="d-flex justify-content-between mt-4">
             <%= form.submit "Create Outfit", class: "btn btn-success" %>
-            <%= link_to 'Back', outfits_path, class: "btn btn-secondary" %>
+            <%= link_to 'Back', request.referer || outfits_path, class: "btn btn-secondary mt-3" %>
           </div>
         <% end %>
       </div>

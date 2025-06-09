@@ -58,7 +58,7 @@
           <div class="card h-100 shadow-sm">
             <% if clothing.image.attached? %>
               <%= link_to clothing_path(clothing) do %>
-                <%= image_tag clothing.image, class: "card-img-top", style: "object-fit: cover; height: 300px;", alt: "Image of #{clothing.name || 'Unnamed'} - #{clothing.brand || 'No Brand'} #{clothing.category || 'Uncategorized'}" %>
+                <%= image_tag clothing.image, class: "card-img-top", style: "object-fit: cover; height: 300px;", alt: "Image of #{clothing.name} - #{clothing.brand} #{clothing.category}" %>
               <% end %>
             <% else %>
               <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 300px;">
@@ -71,6 +71,25 @@
                 <h5 class="card-title"><%= clothing.name %></h5>
                 <p class="card-text text-muted"><%= clothing.brand %> — <%= clothing.category %></p>
               </div>
+
+              <% if user_signed_in? %>
+              <% if current_user.outfits.any? %>
+                  <%= form_with url: outfit_items_path, method: :post, local: true do %>
+                    <%= hidden_field_tag :clothing_id, clothing.id %>
+                      <div class="d-flex justify-content gap-2">
+                        <%= select_tag :outfit_id,
+                          options_from_collection_for_select(current_user.outfits, :id, :name),
+                          prompt: "Select an Outfit",
+                          class: "form-select form-select-sm" %>
+                        <%= submit_tag "Add", class: "btn btn-success" %>
+                      </div>
+                    <% end %>
+                  <%= link_to 'Add to New Outfit', new_outfit_path, class: "btn btn-primary mt-2" %> 
+                <% else %>
+                  <!-- Show "Create an Outfit" if no outfits exist -->
+                  <%= link_to 'Add to New Outfit', new_outfit_path, class: "btn btn-primary mt" %> 
+                <% end %>
+              <% end %>
 
               <div class="d-flex justify-content-end gap-2 mt-3 flex-wrap">
               <% unless clothing.thrift_item %>
@@ -94,15 +113,3 @@
   <% end %>
 </div>
 
-
-<footer class="bg-dark text-white text-center py-3 mt-5">
-  <div class="container">
-    <p class="mb-1">© 2025 Outfit Generator by Faith Do, Crystal Chen, Natalie Hong, Areg Aslanyan</p>
-    <div>
-      <%= link_to "Home", root_path, class: "text-white me-3" %>
-      <%= link_to "Catalog", catalog_path, class: "text-white me-3" %>
-      <%= link_to "Add Item", new_clothing_path, class: "text-white me-3" if user_signed_in? %>
-      <a href="mailto:outfitgen@gmail.com" class="text-white">Contact</a>
-    </div>
-  </div>
-</footer>
