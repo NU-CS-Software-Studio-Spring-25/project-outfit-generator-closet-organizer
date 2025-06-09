@@ -117,8 +117,6 @@ end
   
 
   def destroy
-    @clothing from set_clothing
-  
     if @clothing.user_id.nil?
       if current_user.admin?
         # Admin deleting a public item — delete it fully
@@ -137,7 +135,8 @@ end
     else
       redirect_to catalog_path, alert: "You can't delete this item."
     end
-  end      
+  end
+  
 
   private
   def set_clothing #find clothing item by id
