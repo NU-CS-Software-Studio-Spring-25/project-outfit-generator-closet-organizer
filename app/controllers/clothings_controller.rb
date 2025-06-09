@@ -104,8 +104,7 @@ end
     @clothing = Clothing.find(params[:id])
     
     if @clothing.user_id.nil? || @clothing.user != current_user
-      redirect_to catalog_path, alert: "You can't update this item."
-      return
+      redirect_to catalog_path, alert: "You can't update this item." and return
     end
   
     if @clothing.update(clothing_params)
@@ -117,7 +116,7 @@ end
   
 
   def destroy
-    clothing = Clothing.find(params[:id])
+    @clothing from set_clothing
   
     if @clothing.user_id.nil?
       if current_user.admin?
