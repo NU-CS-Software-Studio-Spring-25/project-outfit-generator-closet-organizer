@@ -103,11 +103,13 @@ end
   end  
 
   def update
-    
-    if @clothing.user_id.nil? || @clothing.user != current_user
-      redirect_to catalog_path, alert: "You can't update this item." and return
+    @clothing = Clothing.find(params[:id])
+
+    unless current_user.admin? || @clothing.user == current_user
+      redirect_to catalog_path, alert: "You can't update this item."
+      return
     end
-  
+
     if @clothing.update(clothing_params)
       redirect_to catalog_path, notice: "Clothing item was successfully updated."
     else
