@@ -61,7 +61,7 @@ class ClothingsController < ApplicationController
     scope = scope.where("LOWER(category) = ?", category_filter.downcase)
   end
 
-  @clothings = scope.order(created_at: :desc).page(params[:page])
+  @clothings = scope.order(created_at: :desc).page(params[:page]).per(12)
   @no_results = @clothings.empty?
 end
 
