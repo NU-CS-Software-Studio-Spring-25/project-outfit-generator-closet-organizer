@@ -1,6 +1,6 @@
 <h1><%= @clothing.new_record? ? "New Clothing Item" : "Edit Clothing Item" %></h1>
 
-<%= form_with(model: @clothing, local: true, html: { class: "clothing-form" }) do |form| %>
+<%= form_with(model: @clothing, local: true, html: { class: "clothing-form", multipart: true }) do |form| %>
   <div class="form-group">
     <%= form.label :name %>
     <%= form.text_field :name, class: "form-control"%>
