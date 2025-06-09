@@ -117,7 +117,7 @@ end
   
 
   def destroy
-    @clothing = Clothing.find(params[:id])
+    clothing = Clothing.find(params[:id])
   
     if @clothing.user_id.nil?
       if current_user.admin?
