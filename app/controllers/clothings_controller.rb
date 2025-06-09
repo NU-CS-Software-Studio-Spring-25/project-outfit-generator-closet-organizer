@@ -117,7 +117,6 @@ end
   
 
   def destroy
-    @clothing from set_clothing
   
     if @clothing.user_id.nil?
       if current_user.admin?
