@@ -15,11 +15,16 @@ class OutfitsController < ApplicationController
 
     def new
       @outfit = Outfit.new
+      @clothing_id = params[:clothing_id]
     end
   
     def create
       @outfit = current_user.outfits.build(outfit_params)
       if @outfit.save
+        if params[:clothing_id].present?
+          clothing = Clothing.find(params[:clothing_id])
+          @outfit.outfit_items.create(clothing: clothing) if clothing
+        end
         redirect_to @outfit, notice: "Outfit created successfully."
       else
         render :new

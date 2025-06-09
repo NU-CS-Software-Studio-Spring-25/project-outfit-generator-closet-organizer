@@ -5,6 +5,8 @@
         <h2 class="mb-4 text-center">Create a New Outfit</h2>
 
         <%= form_with(model: @outfit, local: true) do |form| %>
+          <%= hidden_field_tag :clothing_id, @clothing_id if @clothing_id.present? %>   
+               
           <% if @outfit.errors.any? %>
             <div class="alert alert-danger">
               <h5 class="mb-2">Please fix the following errors:</h5>
