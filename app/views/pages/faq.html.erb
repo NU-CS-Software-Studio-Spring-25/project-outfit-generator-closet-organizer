@@ -3,9 +3,9 @@
 
   <div class="accordion" id="faqAccordion">
     <% faqs = [
-      { question: "How do I upload clothing?", answer: "After logging in, go to the Catalog and click 'Add New Clothing Item'." },
-      { question: "Can I delete someone else's clothing?", answer: "No. You can only delete items you uploaded unless you're an admin." },
-      { question: "What is the Thrift page?", answer: "It's where users can share clothing with others and set a price." }
+      { question: "How do I upload clothing?", answer: "You must be logged into an account to upload items from your own closet. After logging in, go to the Catalog and click 'Add New Clothing Item'. This will take you to a page to add a name, brand, and clothing type to your item." },
+      { question: "Can I delete someone else's clothing?", answer: "No. You can only delete items you uploaded. All other items in the catalog are publicly viewable items. You can however, choose to hide these items from your view by selecting 'Hide'." },
+      { question: "What is the Thrift page?", answer: "The Thirft page allows users to share clothing with each other for a set price." }
     ] %>
 
     <% faqs.each_with_index do |faq, i| %>
