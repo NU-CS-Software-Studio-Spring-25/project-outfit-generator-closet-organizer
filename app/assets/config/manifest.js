@@ -5,3 +5,4 @@
 //= link controllers/hello_controller.js
 //= link controllers/index.js
 //= link validate_new_clothing_form.js
+//= link application.css
