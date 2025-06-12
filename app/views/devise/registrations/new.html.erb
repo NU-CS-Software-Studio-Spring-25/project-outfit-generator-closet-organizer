@@ -1,29 +1,42 @@
-<h2>Sign up</h2>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Sign up</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+  <body>
+    <main role="main" class="container my-5">
+      <h1>Sign up</h1>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+        <div class="field mb-3">
+          <%= f.label :email, "Email", for: "#{resource_name}_email" %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", id: "#{resource_name}_email", class: "form-control" %>
+        </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+        <div class="field mb-3">
+          <%= f.label :password, "Password", for: "#{resource_name}_password" %>
+          <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %><br />
+          <%= f.password_field :password, autocomplete: "new-password", id: "#{resource_name}_password", class: "form-control" %>
+        </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+        <div class="field mb-3">
+          <%= f.label :password_confirmation, "Password confirmation", for: "#{resource_name}_password_confirmation" %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", id: "#{resource_name}_password_confirmation", class: "form-control" %>
+        </div>
 
-<%= render "devise/shared/links" %>
+        <div class="actions">
+          <%= f.submit "Sign up", class: "btn btn-primary", style: "background-color: #3A7CA5; border: none;" %>
+        </div>
+      <% end %>
+
+      <%= render "devise/shared/links" %>
+    </main>
+  </body>
+</html>
