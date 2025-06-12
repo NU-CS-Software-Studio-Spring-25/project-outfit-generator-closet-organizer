@@ -3,6 +3,8 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import "bootstrap"
 import "./validate_new_clothing_form"
+import "chartkick"
+import "Chart.bundle"
 Rails.start()
 
 document.addEventListener("DOMContentLoaded", () => {

@@ -28,6 +28,21 @@
     </div>
   </div>
 
+  <div class="my-5">
+    <h3>Clothing Uploads Over Time</h3>
+    <%= line_chart Clothing.group_by_day(:created_at).count, height: "300px" %>
+
+    <h3 class="mt-4">User Signups Per Week</h3>
+    <%= bar_chart User.group_by_week(:created_at).count, height: "300px" %>
+
+    <h3 class="mt-4">Clothing Ownership</h3>
+    <%= pie_chart({
+      "User Uploaded" => Clothing.where.not(user_id: nil).count,
+      "Admin Uploaded" => Clothing.where(user_id: nil).count
+    }, height: "300px") %>
+  </div>
+
+
   <h3>Recent Users</h3>
   <table class="table table-striped">
     <thead>
