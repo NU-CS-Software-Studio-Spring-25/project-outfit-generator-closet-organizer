@@ -47,6 +47,7 @@ gem "thruster", require: false
 # Bootstrap GEM File
 gem "bootstrap", "~> 5.3.0"
 gem "jquery-rails"
+gem "sassc-rails"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -69,7 +70,5 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
-
-gem "sassc-rails"
 
 gem "kaminari", "~> 1.2"

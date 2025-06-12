@@ -1,7 +1,12 @@
 <h2>List for Thrift: <%= @clothing.name %></h2>
+
 <%= form_with model: @thrift_item do |f| %>
-    <%= f.hidden_field :clothing_id, value: @clothing.id %>
-    <%= f.label :price %>
-  <%= f.number_field :price, step: 0.01 %>
+  <%= f.hidden_field :clothing_id, value: @clothing.id %>
+
+  <div class="mb-3">
+    <%= f.label :price, class: "form-label" %>
+    <%= f.number_field :price, step: 0.01, min: 0, class: "form-control" %>
+  </div>
+
   <%= f.submit "List Item", class: "btn btn-success mt-2" %>
 <% end %>

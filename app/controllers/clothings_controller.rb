@@ -61,7 +61,7 @@ class ClothingsController < ApplicationController
     scope = scope.where("LOWER(category) = ?", category_filter.downcase)
   end
 
-  @clothings = scope.order(created_at: :desc).page(params[:page])
+  @clothings = scope.order(created_at: :desc).page(params[:page]).per(12)
   @no_results = @clothings.empty?
 end
 
@@ -103,9 +103,11 @@ end
   end  
 
   def update
-    
-    if @clothing.user_id.nil? || @clothing.user != current_user
-      redirect_to catalog_path, alert: "You can't update this item." and return
+    @clothing = Clothing.find(params[:id])
+
+    unless current_user.admin? || @clothing.user == current_user
+      redirect_to catalog_path, alert: "You can't update this item."
+      return
     end
 
     if @clothing.update(clothing_params)
@@ -117,8 +119,6 @@ end
   
 
   def destroy
-    @clothing from set_clothing
-  
     if @clothing.user_id.nil?
       if current_user.admin?
         # Admin deleting a public item — delete it fully
@@ -137,7 +137,8 @@ end
     else
       redirect_to catalog_path, alert: "You can't delete this item."
     end
-  end      
+  end
+  
 
   private
   def set_clothing #find clothing item by id
